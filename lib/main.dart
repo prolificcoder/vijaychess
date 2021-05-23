@@ -1,5 +1,6 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,8 +28,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void _incrementCounter() {
-    setState(() {});
+  void _openEmailIntent() async {
+    final Email email = Email(
+      subject: 'Chess coaching inquiry',
+      body: '''
+Name: 
+Age: 
+Rating:
+      ''',
+      recipients: ['satya@malugu.com'],
+      isHTML: false,
+    );
+
+    await FlutterEmailSender.send(email);
   }
 
   @override
@@ -54,20 +66,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               SizedBox(height: 16),
               ExpandablePanel(
-                header: Text('One hour classes'),
+                header: Text('Classes'),
                 collapsed: Text(''),
                 expanded: Text(
                     'Get started with one hour group lessons, \$20 per class. Max 8 kids at one time. Timings depend on kids level'),
               ),
               SizedBox(height: 16),
               Text('Location: 2512 242nd Ave SE, Sammamish'),
-              SizedBox(height: 16),
-              ExpandablePanel(
-                header: Text('RSVP'),
-                collapsed: Text(''),
-                expanded: Text(
-                    'RSVP in the form below and you will hear back from me with confirmation'),
-              ),
               SizedBox(height: 16),
               ExpandablePanel(
                 header: Text('About me'),
@@ -79,15 +84,15 @@ class _MyHomePageState extends State<MyHomePage> {
               ExpandablePanel(
                 header: Text('Coaching style'),
                 collapsed: Text(''),
-                expanded: Text('While I coach at various levels, my skill and passion shines for committed players who want to compete in tournaments. My focus in teaching will be on practical OTB play with analysis of previous games and retrospection. I teach skills that avoid making blunders and improvement from each serious tournament game. I specialize in middle game and attacking style because I believe this brings rapid development. My coach has this favorite quote, "even if the opponent is a world champion, he has the same set of pieces and has to work with the same rules to defeat you". You are in control of your game, its a great equalizer. Currently my focus is on teaching my young son and hence my rates are very low because he accompanies me during the class. A quote from a 12 yr old student\'s parent "Thanks to your coaching, he has been showing more interest in chess than anything else so far'),
+                expanded: Text(
+                    'While I coach at various levels, my skill and passion shines for committed players who want to compete in tournaments. My focus in teaching will be on practical OTB play with analysis of previous games and retrospection. I teach skills that avoid making blunders and improvement from each serious tournament game. I specialize in middle game and attacking style because I believe this brings rapid development. My coach has this favorite quote, "even if the opponent is a world champion, he has the same set of pieces and has to work with the same rules to defeat you". You are in control of your game, its a great equalizer. Currently my focus is on teaching my young son and hence my rates are very low because he accompanies me during the class. A quote from a 12 yr old student\'s parent "Thanks to your coaching, he has been showing more interest in chess than anything else so far'),
               ),
-              Text('Contact me for additional details'),
             ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: _openEmailIntent,
         tooltip: 'Contact',
         child: Icon(Icons.mail_outlined),
       ), // This trailing comma makes auto-formatting nicer for build methods.
