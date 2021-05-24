@@ -118,7 +118,7 @@ After few years I came to the US and played in a few tournaments and with in cou
         child: Icon(Icons.mail_outlined),
       ),
       persistentFooterButtons: <Widget>[
-        Text('Made with flutter'),
+        Text('Made with flutter, code hosted at https://github.com/prolificcoder/vijaychess'),
       ],
     );
   }
