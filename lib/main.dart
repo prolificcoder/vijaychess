@@ -69,10 +69,12 @@ Rating:
                 SizedBox(height: 16),
                 ExpandablePanel(
                   header: Text(
-                      'VCC Kickoff: OTB Class + Tournament on Memorial day - May 31st'),
+                      'VCC Kickoff: OTB Class + Rated Tournament on Memorial day - May 31st'),
                   collapsed: Text(''),
                   expanded: Text(
                       '''Get ready for some over the board chess! We are going to kickoff VCC by a class + rated tournament event.
+Class starts at 2PM sharp and should be finished by 3. There will be break for about 15 mins and then we start the tournament. Wrap up around 6PM.
+Masks are required for the entire duration.
 Class will cover basic over the board rules including notation and tactics on f7.
 Game 25 + 5 sec increment. Mini swiss 3 round event. Real pieces, real clock, real notation.
 \$50 entry fee. Prize fund 50% of entree fees. Special prize for notation accuracy.
