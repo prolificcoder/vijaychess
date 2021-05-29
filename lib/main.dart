@@ -68,10 +68,15 @@ Rating:
                 ),
                 SizedBox(height: 16),
                 ExpandablePanel(
-                  header: Text('Classes'),
+                  header: Text(
+                      'VCC Kickoff: OTB Class + Tournament on Memorial day - May 31st'),
                   collapsed: Text(''),
                   expanded: Text(
-                      'Get started with one hour group lessons, \$25 per class. Max 8 kids at one time. Timings depend on kids level'),
+                      '''Get ready for some over the board chess! We are going to kickoff VCC by a class + rated tournament event.
+Class will cover basic over the board rules including notation and tactics on f7.
+Game 25 + 5 sec increment. Mini swiss 3 round event. Real pieces, real clock, real notation.
+\$50 entry fee. Prize fund 50% of entree fees. Special prize for notation accuracy.
+'''),
                 ),
                 SizedBox(height: 16),
                 ExpandablePanel(
@@ -90,12 +95,6 @@ Resources available over the internet for chess improvement are vast and I will 
                 ),
                 SizedBox(height: 16),
                 ExpandablePanel(
-                  header: Text('Would you have summer camp or tournaments'),
-                  collapsed: Text(''),
-                  expanded: Text('Stay tuned... and watch this space'),
-                ),
-                SizedBox(height: 16),
-                ExpandablePanel(
                   header: Text('About me'),
                   collapsed: Text(''),
                   expanded: Text('''
@@ -110,8 +109,7 @@ After few years I came to the US and played in a few tournaments and with in cou
                 ExpandablePanel(
                   header: Text('Coaching style'),
                   collapsed: Text(''),
-                  expanded: Text(
-'''
+                  expanded: Text('''
 While I coach at various levels, my skill and passion shines for committed players who want to compete in tournaments.
 My focus in teaching will be on practical OTB play with analysis of previous games and retrospection. I teach skills that avoid making blunders and improvement from each serious tournament game. 
 I specialize in middle game and attacking style because I believe this brings rapid development. My coach has this favorite quote, "even if the opponent is a world champion, he has the same set of pieces and has to work with the same rules to defeat you".
