@@ -1,4 +1,4 @@
-package com.example.vijaychess
+package com.malugu.vijaychess
 
 import io.flutter.embedding.android.FlutterActivity
 
