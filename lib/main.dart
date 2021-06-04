@@ -67,6 +67,19 @@ Rating:
                   'Over the board outdoor chess by National Master - Satyajit Malugu',
                   style: Theme.of(context).textTheme.headline5,
                 ),
+                ExpandablePanel(
+                  header: Text('VCC Class + Tournament: Jun 12th 10AM'),
+                  collapsed: Text(''),
+                  expanded: Text(
+                      '''Over the board class, some pizza and rated tournament
+Class starts at 10AM sharp. Then there will be break and we start the tournament at about 11. Pizza will be served as lunch. 
+Masks are required for class time.
+Class will be focused on opening principles and exploitation of opening mistakes.
+Tournament Game 25 + 5 sec increment. Mini swiss/Quad 3 round event. Real pieces, real clock, real notation.
+If you would like class only or tournament only for a lower price, that's an option too.
+
+\$50 entry fee. Prize fund 50% of entree fees. Special prize for notation accuracy.'''),
+                ),
                 SizedBox(height: 16),
                 ExpandablePanel(
                   header: Text('Past events'),
@@ -76,16 +89,14 @@ Rating:
                         'VCC Kickoff: OTB Class + Rated Tournament on Memorial day - May 31st'),
                     Row(children: [
                       Linkify(
-                        text: 
+                        text:
                             '''Get ready for some over the board chess! We are going to kickoff VCC by a class + rated tournament event.
 Class starts at 2PM sharp and should be finished by 3. There will be break for about 15 mins and then we start the tournament. Wrap up around 6PM.
 Masks are required for the entire duration.
 Class will cover basic over the board rules including notation and tactics on f7.
-Game 25 + 5 sec increment. Mini swiss 3 round event. Real pieces, real clock, real notation.
+Game 25 + 5 sec increment. Quad 3 round event. Real pieces, real clock, real notation.
 If you would like class only or tournament only for a lower price, that's an option too.
 \$50 entry fee. Prize fund 50% of entree fees. Special prize for notation accuracy.
-
-Ratings cross table: http://chess.ratingsnw.com/report20-21/VijayChessClubMemDay.html
 ''',
                       ),
                       Expanded(
@@ -93,8 +104,12 @@ Ratings cross table: http://chess.ratingsnw.com/report20-21/VijayChessClubMemDay
                         'images/VCC-kickoff-class.jpg',
                         height: 300,
                         width: 300,
-                      ))
+                      )),
                     ]),
+                    Linkify(
+                      text:
+                          'Ratings cross table posted at: http://chess.ratingsnw.com/report20-21/VijayChessClubMemDay.html',
+                    ),
                   ]),
                 ),
                 SizedBox(height: 16),
