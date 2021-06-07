@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -47,12 +48,11 @@ Rating:
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    List<String> imageList = [
+      'VCC-kickoff-1.jpg',
+      'VCC-kickoff-2.jpg',
+      'VCC-kickoff-3.jpg'
+    ];
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -68,7 +68,8 @@ Rating:
                   style: Theme.of(context).textTheme.headline5,
                 ),
                 ExpandablePanel(
-                  header: Text('VCC Class + Tournament: Jun 12th 10AM'),
+                  header: Text('VCC Class + Tournament: Jun 12th 10AM',
+                      style: Theme.of(context).textTheme.subtitle1),
                   collapsed: Text(''),
                   expanded: Text(
                       '''Over the board class, some pizza and rated tournament
@@ -82,45 +83,47 @@ If you would like class only or tournament only for a lower price, that's an opt
                 ),
                 SizedBox(height: 16),
                 ExpandablePanel(
-                  header: Text('Past events'),
+                  header: Text('Past events',
+                      style: Theme.of(context).textTheme.subtitle1),
                   collapsed: Text(''),
                   expanded: Column(children: [
                     Text(
                         'VCC Kickoff: OTB Class + Rated Tournament on Memorial day - May 31st'),
-                    Row(children: [
-                      Linkify(
-                        text:
-                            '''Get ready for some over the board chess! We are going to kickoff VCC by a class + rated tournament event.
+                    Text(
+                        '''Get ready for some over the board chess! We are going to kickoff VCC by a class + rated tournament event.
 Class starts at 2PM sharp and should be finished by 3. There will be break for about 15 mins and then we start the tournament. Wrap up around 6PM.
 Masks are required for the entire duration.
 Class will cover basic over the board rules including notation and tactics on f7.
 Game 25 + 5 sec increment. Quad 3 round event. Real pieces, real clock, real notation.
 If you would like class only or tournament only for a lower price, that's an option too.
 \$50 entry fee. Prize fund 50% of entree fees. Special prize for notation accuracy.
-''',
-                      ),
-                      Expanded(
-                          child: Image.asset(
-                        'images/VCC-kickoff-class.jpg',
-                        height: 300,
-                        width: 300,
-                      )),
-                    ]),
+'''),
+                    CarouselSlider(
+                        options: CarouselOptions(),
+                        items: imageList
+                            .map((item) => Container(
+                                    child: Image.asset(
+                                  'images/' + item,
+                                )))
+                            .toList()),
+                    SizedBox(height: 16),
                     Linkify(
-                      text:
-                          'Ratings cross table posted at: http://chess.ratingsnw.com/report20-21/VijayChessClubMemDay.html',
-                    ),
+                        text:
+                            'Ratings cross table posted at: http://chess.ratingsnw.com/report20-21/VijayChessClubMemDay.html',
+                        options: LinkifyOptions(humanize: false)),
                   ]),
                 ),
                 SizedBox(height: 16),
                 ExpandablePanel(
-                  header: Text('Location'),
+                  header: Text('Location',
+                      style: Theme.of(context).textTheme.subtitle1),
                   collapsed: Text(''),
                   expanded: Text('2512 242nd Ave SE, Sammamish'),
                 ),
                 SizedBox(height: 16),
                 ExpandablePanel(
-                  header: Text('Why in person?'),
+                  header: Text('Why in person?',
+                      style: Theme.of(context).textTheme.subtitle1),
                   collapsed: Text(''),
                   expanded: Text('''
 Serious chess tournaments happen over the board and I would like students to get prepared for them. Also for retention and engagement, real life can't be beat. 
@@ -129,12 +132,14 @@ Resources available over the internet for chess improvement are vast and I will 
                 ),
                 SizedBox(height: 16),
                 ExpandablePanel(
-                    header: Text('About'),
+                    header: Text('About',
+                        style: Theme.of(context).textTheme.subtitle1),
                     collapsed: Text(''),
                     expanded: Column(
                       children: [
                         ExpandablePanel(
-                          header: Text('About me'),
+                          header: Text('About me',
+                              style: Theme.of(context).textTheme.subtitle2),
                           collapsed: Text(''),
                           expanded: Linkify(
                               onOpen: (link) => launch(link.url), text: '''
@@ -151,7 +156,8 @@ Linkedin: https://www.linkedin.com/in/satyajitmalugu/
                         ),
                         SizedBox(height: 16),
                         ExpandablePanel(
-                          header: Text('Coaching style'),
+                          header: Text('Coaching style',
+                              style: Theme.of(context).textTheme.subtitle2),
                           collapsed: Text(''),
                           expanded: Text('''
 While I coach at various levels, my skill and passion shines for committed players who want to compete in tournaments.
