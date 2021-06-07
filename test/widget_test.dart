@@ -15,6 +15,6 @@ void main() {
     await tester.pumpWidget(MyApp());
 
     expect(find.text('Vijay chess club'), findsOneWidget);
-    expect(find.text('About me'), findsOneWidget);
+    expect(find.text('About'), findsOneWidget);
   });
 }
