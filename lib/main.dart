@@ -83,6 +83,18 @@ If you would like class only or tournament only for a lower price, that's an opt
                 ),
                 SizedBox(height: 16),
                 ExpandablePanel(
+                  header: Text('VCC July OTB Tournament : July 10th 10AM',
+                      style: Theme.of(context).textTheme.subtitle1),
+                  collapsed: Text(''),
+                  expanded: Text('''Over the board tournament and pizza
+Firt round starts at 10. Pizza will be served as lunch. 
+Masks are required for entire duration.
+Tournament Game 25 + 5 sec increment. Mini swiss/Quad 3 round event. Real pieces, real clock, real notation.
+
+\$50 entry fee. Prize fund 50% of entree fees. Special prize for notation accuracy.'''),
+                ),
+                SizedBox(height: 16),
+                ExpandablePanel(
                   header: Text('Past events',
                       style: Theme.of(context).textTheme.subtitle1),
                   collapsed: Text(''),
