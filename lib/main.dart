@@ -74,7 +74,7 @@ Rating:
                   expanded: Text(
                       '''Over the board class, some pizza and rated tournament
 Class starts at 10AM sharp. Then there will be break and we start the tournament at about 11. Pizza will be served as lunch. 
-Masks are required for class time.
+Masks are required for class time. Capped at max 10 players
 Class will be focused on opening principles and exploitation of opening mistakes.
 Tournament Game 25 + 5 sec increment. Mini swiss/Quad 3 round event. Real pieces, real clock, real notation.
 If you would like class only or tournament only for a lower price, that's an option too.
@@ -87,11 +87,11 @@ If you would like class only or tournament only for a lower price, that's an opt
                       style: Theme.of(context).textTheme.subtitle1),
                   collapsed: Text(''),
                   expanded: Text('''Over the board tournament and pizza
-Firt round starts at 10. Pizza will be served as lunch. 
+First round starts at 10, should be done by around 1PM. Pizza will be served as lunch. 
 Masks are required for entire duration.
 Tournament Game 25 + 5 sec increment. Mini swiss/Quad 3 round event. Real pieces, real clock, real notation.
 
-\$50 entry fee. Prize fund 50% of entree fees. Special prize for notation accuracy.'''),
+\$30 entry fee. Prize fund 50% of entree fees. Special prize for notation accuracy.'''),
                 ),
                 SizedBox(height: 16),
                 ExpandablePanel(
