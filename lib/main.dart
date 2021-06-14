@@ -48,10 +48,18 @@ Rating:
 
   @override
   Widget build(BuildContext context) {
-    List<String> imageList = [
+    List<String> kickoffImageList = [
       'VCC-kickoff-1.jpg',
       'VCC-kickoff-2.jpg',
       'VCC-kickoff-3.jpg'
+    ];
+    List<String> juneImageList = [
+      'VCC-june-1.jpg',
+      'VCC-june-2.jpg',
+      'VCC-june-3.jpg',
+      'VCC-june-4.jpg',
+      'VCC-june-5.jpg',
+      'VCC-june-6.jpg',
     ];
     return Scaffold(
       appBar: AppBar(
@@ -68,22 +76,7 @@ Rating:
                   style: Theme.of(context).textTheme.headline5,
                 ),
                 ExpandablePanel(
-                  header: Text('VCC Class + Tournament: Jun 12th 10AM',
-                      style: Theme.of(context).textTheme.subtitle1),
-                  collapsed: Text(''),
-                  expanded: Text(
-                      '''Over the board class, some pizza and rated tournament
-Class starts at 10AM sharp. Then there will be break and we start the tournament at about 11. Pizza will be served as lunch. 
-Masks are required for class time. Capped at max 10 players
-Class will be focused on opening principles and exploitation of opening mistakes.
-Tournament Game 25 + 5 sec increment. Mini swiss/Quad 3 round event. Real pieces, real clock, real notation.
-If you would like class only or tournament only for a lower price, that's an option too.
-
-\$50 entry fee. Prize fund 50% of entree fees. Special prize for notation accuracy.'''),
-                ),
-                SizedBox(height: 16),
-                ExpandablePanel(
-                  header: Text('VCC July OTB Tournament : July 10th 10AM',
+                  header: Text('VCC July OTB Tournament : July 10th',
                       style: Theme.of(context).textTheme.subtitle1),
                   collapsed: Text(''),
                   expanded: Text('''Over the board tournament and pizza
@@ -91,7 +84,7 @@ First round starts at 10, should be done by around 1PM. Pizza will be served as 
 Masks are required for entire duration.
 Tournament Game 25 + 5 sec increment. Mini swiss/Quad 3 round event. Real pieces, real clock, real notation.
 
-\$30 entry fee. Prize fund 50% of entree fees. Special prize for notation accuracy.'''),
+\$30 entry fee. Prize fund 70% of entree fees. Special prize for notation accuracy.'''),
                 ),
                 SizedBox(height: 16),
                 ExpandablePanel(
@@ -99,10 +92,39 @@ Tournament Game 25 + 5 sec increment. Mini swiss/Quad 3 round event. Real pieces
                       style: Theme.of(context).textTheme.subtitle1),
                   collapsed: Text(''),
                   expanded: Column(children: [
-                    Text(
-                        'VCC Kickoff: OTB Class + Rated Tournament on Memorial day - May 31st'),
-                    Text(
-                        '''Get ready for some over the board chess! We are going to kickoff VCC by a class + rated tournament event.
+                    ExpandableNotifier(
+                      child: ExpandablePanel(
+                          header: Text('VCC Class + Tournament: Jun 12th',
+                              style: Theme.of(context).textTheme.subtitle1),
+                          collapsed: Text(''),
+                          expanded: Column(children: [
+                            Text(
+                                '''Over the board class, some pizza and rated tournament
+Class starts at 10AM sharp. Then there will be break and we start the tournament at about 11. Pizza will be served as lunch. 
+Masks are required for class time. Capped at max 10 players
+Class will be focused on opening principles and exploitation of opening mistakes.
+Tournament Game 25 + 5 sec increment. Mini swiss/Quad 3 round event. Real pieces, real clock, real notation.
+
+\$50 entry fee. Prize fund 50% of entree fees. Special prize for notation accuracy.'''),
+                            CarouselSlider(
+                                options: CarouselOptions(),
+                                items: juneImageList
+                                    .map((item) => Container(
+                                            child: Image.asset(
+                                          'images/' + item,
+                                        )))
+                                    .toList()),
+                          ])),
+                    ),
+                    SizedBox(height: 16),
+                    ExpandableNotifier(
+                      child: ExpandablePanel(
+                          header: Text(
+                              'VCC Kickoff: OTB Class + Rated Tournament on Memorial day - May 31st'),
+                          collapsed: Text(''),
+                          expanded: Column(children: [
+                            Text(
+                                '''Get ready for some over the board chess! We are going to kickoff VCC by a class + rated tournament event.
 Class starts at 2PM sharp and should be finished by 3. There will be break for about 15 mins and then we start the tournament. Wrap up around 6PM.
 Masks are required for the entire duration.
 Class will cover basic over the board rules including notation and tactics on f7.
@@ -110,19 +132,20 @@ Game 25 + 5 sec increment. Quad 3 round event. Real pieces, real clock, real not
 If you would like class only or tournament only for a lower price, that's an option too.
 \$50 entry fee. Prize fund 50% of entree fees. Special prize for notation accuracy.
 '''),
-                    CarouselSlider(
-                        options: CarouselOptions(),
-                        items: imageList
-                            .map((item) => Container(
-                                    child: Image.asset(
-                                  'images/' + item,
-                                )))
-                            .toList()),
-                    SizedBox(height: 16),
-                    Linkify(
-                        text:
-                            'Ratings cross table posted at: http://chess.ratingsnw.com/report20-21/VijayChessClubMemDay.html',
-                        options: LinkifyOptions(humanize: false)),
+                            CarouselSlider(
+                                options: CarouselOptions(),
+                                items: kickoffImageList
+                                    .map((item) => Container(
+                                            child: Image.asset(
+                                          'images/' + item,
+                                        )))
+                                    .toList()),
+                            Linkify(
+                                text:
+                                    'Ratings cross table posted at: http://chess.ratingsnw.com/report20-21/VijayChessClubMemDay.html',
+                                options: LinkifyOptions(humanize: false)),
+                          ])),
+                    ),
                   ]),
                 ),
                 SizedBox(height: 16),
