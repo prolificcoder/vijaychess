@@ -1,16 +1,33 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expandable/expandable.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:mailto/mailto.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+List<String> kickoffImageList = [
+  'VCC-kickoff-1.jpg',
+  'VCC-kickoff-2.jpg',
+  'VCC-kickoff-3.jpg'
+];
+List<String> juneImageList = [
+  'VCC-june-1.jpg',
+  'VCC-june-2.jpg',
+  'VCC-june-3.jpg',
+  'VCC-june-4.jpg',
+  'VCC-june-5.jpg',
+  'VCC-june-6.jpg',
+];
+
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(VCCApp());
 }
 
-class MyApp extends StatelessWidget {
+class VCCApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,6 +49,28 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool _initialized = false;
+  bool _error = false;
+
+  void initializedFlutterFire() async {
+    try {
+      await Firebase.initializeApp();
+      setState(() {
+        _initialized = true;
+      });
+    } catch (e) {
+      setState(() {
+        _error = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    initializedFlutterFire();
+    super.initState();
+  }
+
   void _openEmailIntent() async {
     final mailtoLink = Mailto(
       subject: 'Chess coaching inquiry',
@@ -48,19 +87,15 @@ Rating:
 
   @override
   Widget build(BuildContext context) {
-    List<String> kickoffImageList = [
-      'VCC-kickoff-1.jpg',
-      'VCC-kickoff-2.jpg',
-      'VCC-kickoff-3.jpg'
-    ];
-    List<String> juneImageList = [
-      'VCC-june-1.jpg',
-      'VCC-june-2.jpg',
-      'VCC-june-3.jpg',
-      'VCC-june-4.jpg',
-      'VCC-june-5.jpg',
-      'VCC-june-6.jpg',
-    ];
+    if (_error) {
+      return ErrorWidget(_error);
+    }
+    if (!_initialized) {
+      return CircularProgressIndicator();
+    }
+    CollectionReference players =
+        FirebaseFirestore.instance.collection('classes');
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -78,7 +113,27 @@ Rating:
                 ExpandablePanel(
                   header: Text('VCC July OTB Tournament : July 10th',
                       style: Theme.of(context).textTheme.subtitle1),
-                  collapsed: Text(''),
+                  collapsed:  FutureBuilder<DocumentSnapshot>(
+      future: players.doc(documentId).get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+
+        if (snapshot.hasError) {
+          return Text("Something went wrong");
+        }
+
+        if (snapshot.hasData && !snapshot.data!.exists) {
+          return Text("Document does not exist");
+        }
+
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+          return Text("Full Name: ${data['full_name']} ${data['last_name']}");
+        }
+
+        return Text("loading");
+      },
+    );,
                   expanded: Text('''Over the board tournament and pizza
 First round starts at 10, should be done by around 1PM. Pizza will be served as lunch. 
 Masks are required for entire duration.

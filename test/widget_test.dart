@@ -12,7 +12,7 @@ import 'package:vijaychess/main.dart';
 void main() {
   testWidgets('Static data test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(VCCApp());
 
     expect(find.text('Vijay chess club'), findsOneWidget);
     expect(find.text('About'), findsOneWidget);
