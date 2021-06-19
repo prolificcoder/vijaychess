@@ -94,7 +94,7 @@ Rating:
       return CircularProgressIndicator();
     }
     CollectionReference players =
-        FirebaseFirestore.instance.collection('classes');
+        FirebaseFirestore.instance.collection('VCC-July');
 
     return Scaffold(
       appBar: AppBar(
@@ -113,27 +113,27 @@ Rating:
                 ExpandablePanel(
                   header: Text('VCC July OTB Tournament : July 10th',
                       style: Theme.of(context).textTheme.subtitle1),
-                  collapsed:  FutureBuilder<DocumentSnapshot>(
-      future: players.doc(documentId).get(),
-      builder:
-          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                  collapsed: FutureBuilder<DocumentSnapshot>(
+                    future: players.doc('Sankalp').get(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      if (snapshot.hasError) {
+                        return Text("Something went wrong ${snapshot.error}");
+                      }
 
-        if (snapshot.hasError) {
-          return Text("Something went wrong");
-        }
+                      if (snapshot.hasData && !snapshot.data!.exists) {
+                        return Text("Document does not exist");
+                      }
 
-        if (snapshot.hasData && !snapshot.data!.exists) {
-          return Text("Document does not exist");
-        }
-
-        if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
-          return Text("Full Name: ${data['full_name']} ${data['last_name']}");
-        }
-
-        return Text("loading");
-      },
-    );,
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        Map<String, dynamic> data =
+                            snapshot.data!.data() as Map<String, dynamic>;
+                        return Text(
+                            "Full Name: ${data['ID']} ${data['Status']}");
+                      }
+                      return Text("loading");
+                    },
+                  ),
                   expanded: Text('''Over the board tournament and pizza
 First round starts at 10, should be done by around 1PM. Pizza will be served as lunch. 
 Masks are required for entire duration.
