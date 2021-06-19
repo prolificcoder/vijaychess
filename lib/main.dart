@@ -133,45 +133,50 @@ Rating:
                           if (data != null) {
                             players.add(Player(
                                 status: data['status'],
-                                ID: data['ID'],
+                                id: data['ID'],
                                 firstName: data['first_name'],
                                 lastName: data['last_name'],
                                 rating: data['rating']));
                           }
                         }
-                        return DataTable(
-                            sortColumnIndex: 3,
-                            sortAscending: true,
-                            columns: [
-                              DataColumn(
-                                  label: Text(
-                                'Status',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              )),
-                              DataColumn(
-                                  label: Text(
-                                'First Name',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              )),
-                              DataColumn(
-                                  label: Text(
-                                'Last Name',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              )),
-                              DataColumn(
-                                  label: Text(
-                                'Rating',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              )),
-                            ],
-                            rows: List<DataRow>.generate(
-                                players.length,
-                                (index) => DataRow(cells: [
-                                      DataCell(Text(players[index].status)),
-                                      DataCell(Text(players[index].firstName)),
-                                      DataCell(Text(players[index].lastName)),
-                                      DataCell(Text(players[index].rating)),
-                                    ])));
+                        return Column(children: [
+                          Text(
+                              'Roster so far, max spots: 10, available: 3, expand for more details'),
+                          DataTable(
+                              sortColumnIndex: 3,
+                              sortAscending: true,
+                              columns: [
+                                DataColumn(
+                                    label: Text(
+                                  'Status',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                )),
+                                DataColumn(
+                                    label: Text(
+                                  'First Name',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                )),
+                                DataColumn(
+                                    label: Text(
+                                  'Last Name',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                )),
+                                DataColumn(
+                                    label: Text(
+                                  'Rating',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                )),
+                              ],
+                              rows: List<DataRow>.generate(
+                                  players.length,
+                                  (index) => DataRow(cells: [
+                                        DataCell(Text(players[index].status)),
+                                        DataCell(
+                                            Text(players[index].firstName)),
+                                        DataCell(Text(players[index].lastName)),
+                                        DataCell(Text(players[index].rating)),
+                                      ]))),
+                        ]);
                       }),
                   expanded: Text('''Over the board tournament and pizza
 First round starts at 10, should be done by around 1PM. Pizza will be served as lunch. 
