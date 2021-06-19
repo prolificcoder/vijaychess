@@ -124,7 +124,7 @@ Rating:
                         }
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return Text("loading");
+                          return Text("loading...");
                         }
                         List<Player> players = [];
                         for (var doc in snapshot.data!.docs) {
@@ -139,12 +139,30 @@ Rating:
                                 rating: data['rating']));
                           }
                         }
-                        return new DataTable(
+                        return DataTable(
+                            sortColumnIndex: 3,
+                            sortAscending: true,
                             columns: [
-                              DataColumn(label: Text('Status')),
-                              DataColumn(label: Text('First Name')),
-                              DataColumn(label: Text('Last Name')),
-                              DataColumn(label: Text('Rating')),
+                              DataColumn(
+                                  label: Text(
+                                'Status',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              )),
+                              DataColumn(
+                                  label: Text(
+                                'First Name',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              )),
+                              DataColumn(
+                                  label: Text(
+                                'Last Name',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              )),
+                              DataColumn(
+                                  label: Text(
+                                'Rating',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              )),
                             ],
                             rows: List<DataRow>.generate(
                                 players.length,
