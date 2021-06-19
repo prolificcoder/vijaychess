@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expandable/expandable.dart';
@@ -141,7 +139,7 @@ Rating:
                         }
                         return Column(children: [
                           Text(
-                              'Roster so far, max spots: 10, available: 3, expand for more details'),
+                              'Roster so far, max spots: 12, available: 5, expand for more details'),
                           DataTable(
                               sortColumnIndex: 3,
                               sortAscending: true,
