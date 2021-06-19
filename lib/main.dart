@@ -10,6 +10,8 @@ import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:mailto/mailto.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'model/players.dart';
+
 List<String> kickoffImageList = [
   'VCC-kickoff-1.jpg',
   'VCC-kickoff-2.jpg',
@@ -95,8 +97,7 @@ Rating:
     if (!_initialized) {
       return CircularProgressIndicator();
     }
-    final Stream<QuerySnapshot> _playersStream =
-        FirebaseFirestore.instance.collection('VCC-July').snapshots();
+    final players = FirebaseFirestore.instance.collection('VCC-July');
 
     return Scaffold(
       appBar: AppBar(
@@ -115,8 +116,8 @@ Rating:
                 ExpandablePanel(
                   header: Text('VCC July OTB Tournament : July 10th',
                       style: Theme.of(context).textTheme.subtitle1),
-                  collapsed: StreamBuilder<QuerySnapshot>(
-                      stream: _playersStream,
+                  collapsed: FutureBuilder<QuerySnapshot>(
+                      future: players.get(),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
                           return Text("Something went wrong ${snapshot.error}");
@@ -125,16 +126,34 @@ Rating:
                             ConnectionState.waiting) {
                           return Text("loading");
                         }
+                        List<Player> players = [];
+                        for (var doc in snapshot.data!.docs) {
+                          Map<String, dynamic>? data =
+                              doc.data() as Map<String, dynamic>?;
+                          if (data != null) {
+                            players.add(Player(
+                                status: data['status'],
+                                ID: data['ID'],
+                                firstName: data['first_name'],
+                                lastName: data['last_name'],
+                                rating: data['rating']));
+                          }
+                        }
                         return new DataTable(
-                          columns: [
-                            DataColumn(label: Text('Last Name')),
-                            DataColumn(label: Text('First Name')),
-                            DataColumn(label: Text('ID')),
-                            DataColumn(label: Text('Rating')),
-                          ],
-                          rows: List<DataRow>.from(
-                              snapshot.data!.docs.first as Iterable<dynamic>),
-                        );
+                            columns: [
+                              DataColumn(label: Text('Status')),
+                              DataColumn(label: Text('First Name')),
+                              DataColumn(label: Text('Last Name')),
+                              DataColumn(label: Text('Rating')),
+                            ],
+                            rows: List<DataRow>.generate(
+                                players.length,
+                                (index) => DataRow(cells: [
+                                      DataCell(Text(players[index].status)),
+                                      DataCell(Text(players[index].firstName)),
+                                      DataCell(Text(players[index].lastName)),
+                                      DataCell(Text(players[index].rating)),
+                                    ])));
                       }),
                   expanded: Text('''Over the board tournament and pizza
 First round starts at 10, should be done by around 1PM. Pizza will be served as lunch. 
@@ -293,15 +312,15 @@ A quote from a 12 yr old student\'s parent "Thanks to your coaching, he has been
     );
   }
 
-  List<DataRow> _createRows(QuerySnapshot snapshot) {
-    List<DataRow> newList =
-        snapshot.docs.map((DocumentSnapshot documentSnapshot) {
-      return new DataRow(cells: [
-        DataCell(Text(
-            documentSnapshot.data()["someDataYouWantToProcessForCellData"]))
-      ]);
-    }).toList();
+  // List<DataRow> _createRows(QuerySnapshot snapshot) {
+  //   List<DataRow> newList =
+  //       snapshot.docs.map((DocumentSnapshot documentSnapshot) {
+  //     return new DataRow(cells: [
+  //       DataCell(Text(
+  //           documentSnapshot.data()["someDataYouWantToProcessForCellData"]))
+  //     ]);
+  //   }).toList();
 
-    return newList;
-  }
+  //   return newList;
+  // }
 }
