@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expandable/expandable.dart';
@@ -93,8 +95,8 @@ Rating:
     if (!_initialized) {
       return CircularProgressIndicator();
     }
-    CollectionReference players =
-        FirebaseFirestore.instance.collection('VCC-July');
+    final Stream<QuerySnapshot> _playersStream =
+        FirebaseFirestore.instance.collection('VCC-July').snapshots();
 
     return Scaffold(
       appBar: AppBar(
@@ -113,27 +115,27 @@ Rating:
                 ExpandablePanel(
                   header: Text('VCC July OTB Tournament : July 10th',
                       style: Theme.of(context).textTheme.subtitle1),
-                  collapsed: FutureBuilder<DocumentSnapshot>(
-                    future: players.doc('Sankalp').get(),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<DocumentSnapshot> snapshot) {
-                      if (snapshot.hasError) {
-                        return Text("Something went wrong ${snapshot.error}");
-                      }
-
-                      if (snapshot.hasData && !snapshot.data!.exists) {
-                        return Text("Document does not exist");
-                      }
-
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        Map<String, dynamic> data =
-                            snapshot.data!.data() as Map<String, dynamic>;
-                        return Text(
-                            "Full Name: ${data['ID']} ${data['Status']}");
-                      }
-                      return Text("loading");
-                    },
-                  ),
+                  collapsed: StreamBuilder<QuerySnapshot>(
+                      stream: _playersStream,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return Text("Something went wrong ${snapshot.error}");
+                        }
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Text("loading");
+                        }
+                        return new DataTable(
+                          columns: [
+                            DataColumn(label: Text('Last Name')),
+                            DataColumn(label: Text('First Name')),
+                            DataColumn(label: Text('ID')),
+                            DataColumn(label: Text('Rating')),
+                          ],
+                          rows: List<DataRow>.from(
+                              snapshot.data!.docs.first as Iterable<dynamic>),
+                        );
+                      }),
                   expanded: Text('''Over the board tournament and pizza
 First round starts at 10, should be done by around 1PM. Pizza will be served as lunch. 
 Masks are required for entire duration.
@@ -289,5 +291,17 @@ A quote from a 12 yr old student\'s parent "Thanks to your coaching, he has been
                 'Made with flutter, code hosted at https://github.com/prolificcoder/vijaychess'),
       ],
     );
+  }
+
+  List<DataRow> _createRows(QuerySnapshot snapshot) {
+    List<DataRow> newList =
+        snapshot.docs.map((DocumentSnapshot documentSnapshot) {
+      return new DataRow(cells: [
+        DataCell(Text(
+            documentSnapshot.data()["someDataYouWantToProcessForCellData"]))
+      ]);
+    }).toList();
+
+    return newList;
   }
 }
