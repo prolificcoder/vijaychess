@@ -124,6 +124,7 @@ Rating:
                             ConnectionState.waiting) {
                           return Text("loading...");
                         }
+                        var maxSpots = 12;
                         var confirmedPlayersCount = 0;
                         List<Player> players = [];
                         for (var doc in snapshot.data!.docs) {
@@ -144,39 +145,47 @@ Rating:
                         }
                         return Column(children: [
                           Text(
-                              'Roster so far, max spots: 12, available: $confirmedPlayersCount, expand for more details'),
-                          DataTable(
-                              columns: [
-                                DataColumn(
-                                    label: Text(
-                                  'Status',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                )),
-                                DataColumn(
-                                    label: Text(
-                                  'First Name',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                )),
-                                DataColumn(
-                                    label: Text(
-                                  'Last Name',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                )),
-                                DataColumn(
-                                    label: Text(
-                                  'Rating',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                )),
-                              ],
-                              rows: List<DataRow>.generate(
-                                  players.length,
-                                  (index) => DataRow(cells: [
-                                        DataCell(Text(players[index].status)),
-                                        DataCell(
-                                            Text(players[index].firstName)),
-                                        DataCell(Text(players[index].lastName)),
-                                        DataCell(Text(players[index].rating)),
-                                      ]))),
+                              'Roster so far, max spots: $maxSpots, available: $maxSpots - $confirmedPlayersCount, expand for more details'),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: DataTable(
+                                columns: [
+                                  DataColumn(
+                                      label: Text(
+                                    'Status',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  )),
+                                  DataColumn(
+                                      label: Text(
+                                    'First Name',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  )),
+                                  DataColumn(
+                                      label: Text(
+                                    'Last Name',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  )),
+                                  DataColumn(
+                                      label: Text(
+                                    'Rating',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  )),
+                                ],
+                                rows: List<DataRow>.generate(
+                                    players.length,
+                                    (index) => DataRow(cells: [
+                                          DataCell(Text(players[index].status)),
+                                          DataCell(
+                                              Text(players[index].firstName)),
+                                          DataCell(
+                                              Text(players[index].lastName)),
+                                          DataCell(Text(players[index].rating)),
+                                        ]))),
+                          ),
                         ]);
                       }),
                   expanded: Text('''Over the board tournament and pizza
