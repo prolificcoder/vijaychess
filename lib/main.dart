@@ -83,8 +83,8 @@ Rating:
       ''',
       to: ['satya@malugu.com'],
     ).toString();
-    print('$mailtoLink');
-    await launch('$mailtoLink');
+    print(mailtoLink);
+    await launch(mailtoLink);
   }
 
   @override
@@ -124,6 +124,7 @@ Rating:
                             ConnectionState.waiting) {
                           return Text("loading...");
                         }
+                        var confirmedPlayersCount = 0;
                         List<Player> players = [];
                         for (var doc in snapshot.data!.docs) {
                           Map<String, dynamic>? data =
@@ -135,14 +136,16 @@ Rating:
                                 firstName: data['first_name'],
                                 lastName: data['last_name'],
                                 rating: data['rating']));
+                            if (data['status'].toString().toLowerCase() ==
+                                'confirmed') {
+                              confirmedPlayersCount++;
+                            }
                           }
                         }
                         return Column(children: [
                           Text(
-                              'Roster so far, max spots: 12, available: 3, expand for more details'),
+                              'Roster so far, max spots: 12, available: $confirmedPlayersCount, expand for more details'),
                           DataTable(
-                              sortColumnIndex: 3,
-                              sortAscending: true,
                               columns: [
                                 DataColumn(
                                     label: Text(
@@ -308,7 +311,7 @@ While I coach at various levels, my skill and passion shines for committed playe
 My focus in teaching will be on practical OTB play with analysis of previous games and retrospection. I teach skills that avoid making blunders and improvement from each serious tournament game. 
 I specialize in middle game and attacking style because I believe this brings rapid development. My coach has this favorite quote, "even if the opponent is a world champion, he has the same set of pieces and has to work with the same rules to defeat you".
 You are in control of your game, its a great equalizer. Currently my focus is on teaching my young son and hence my rates are very low because he accompanies me during the class. 
-A quote from a 12 yr old student\'s parent "Thanks to your coaching, he has been showing more interest in chess than anything else so far
+A quote from a 12 yr old student's parent "Thanks to your coaching, he has been showing more interest in chess than anything else so far
 '''),
                           ),
                         ),
