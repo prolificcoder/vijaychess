@@ -139,7 +139,7 @@ Rating:
                         }
                         return Column(children: [
                           Text(
-                              'Roster so far, max spots: 12, available: 5, expand for more details'),
+                              'Roster so far, max spots: 12, available: 3, expand for more details'),
                           DataTable(
                               sortColumnIndex: 3,
                               sortAscending: true,
