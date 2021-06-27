@@ -143,9 +143,11 @@ Rating:
                             }
                           }
                         }
+                        var spotsLeft = maxSpots - confirmedPlayersCount;
+
                         return Column(children: [
                           Text(
-                              'Roster so far, max spots: $maxSpots, available: $maxSpots - $confirmedPlayersCount, expand for more details'),
+                              'Roster so far, max spots: $maxSpots, available: $spotsLeft, expand for more details'),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: DataTable(
