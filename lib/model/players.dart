@@ -2,7 +2,7 @@ class Player {
   late final String firstName;
   late final String lastName;
   late final String id;
-  late final String rating;
+  late final int rating;
   late final String status;
   Player(
       {required this.firstName,

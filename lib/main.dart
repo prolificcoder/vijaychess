@@ -124,30 +124,26 @@ Rating:
                             ConnectionState.waiting) {
                           return Text("loading...");
                         }
-                        var maxSpots = 12;
-                        var confirmedPlayersCount = 0;
                         List<Player> players = [];
                         for (var doc in snapshot.data!.docs) {
                           Map<String, dynamic>? data =
                               doc.data() as Map<String, dynamic>?;
-                          if (data != null) {
+                          if (data != null &&
+                              data['status'].toString().toLowerCase() ==
+                                  'confirmed') {
                             players.add(Player(
                                 status: data['status'],
                                 id: data['ID'],
                                 firstName: data['first_name'],
                                 lastName: data['last_name'],
-                                rating: data['rating']));
-                            if (data['status'].toString().toLowerCase() ==
-                                'confirmed') {
-                              confirmedPlayersCount++;
-                            }
+                                rating: int.parse(data['rating'])));
                           }
                         }
-                        var spotsLeft = maxSpots - confirmedPlayersCount;
+                        players.sort((b, a) => a.rating.compareTo(b.rating));
 
                         return Column(children: [
                           Text(
-                              'Roster so far, max spots: $maxSpots, available: $spotsLeft, expand for more details'),
+                              'Roster is now all set, all spots are now filled, please email if you want to be on waitlist or for future anouncements'),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: DataTable(
@@ -185,7 +181,9 @@ Rating:
                                               Text(players[index].firstName)),
                                           DataCell(
                                               Text(players[index].lastName)),
-                                          DataCell(Text(players[index].rating)),
+                                          DataCell(Text(players[index]
+                                              .rating
+                                              .toString())),
                                         ]))),
                           ),
                         ]);
@@ -193,9 +191,9 @@ Rating:
                   expanded: Text('''Over the board tournament and pizza
 First round starts at 10, should be done by around 1PM. Pizza will be served as lunch. 
 Masks are required for entire duration.
-Tournament Game 25 + 5 sec increment. Mini swiss/Quad 3 round event. Real pieces, real clock, real notation.
+Tournament Game 25 + 5 sec increment. Quad 3 round event. Real pieces, real clock, real notation.
 
-\$30 entry fee. Prize fund 70% of entree fees. Special prize for notation accuracy.'''),
+\$30 entry fee. Prize fund 50% of entree fees + trophies for winners. Special prize for notation accuracy.'''),
                 ),
                 SizedBox(height: 16),
                 ExpandablePanel(
