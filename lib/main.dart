@@ -9,25 +9,8 @@ import 'package:mailto/mailto.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'model/players.dart';
-
-List<String> kickoffImageList = [
-  'VCC-kickoff-1.jpg',
-  'VCC-kickoff-2.jpg',
-  'VCC-kickoff-3.jpg'
-];
-List<String> juneImageList = [
-  'VCC-june-1.jpg',
-  'VCC-june-2.jpg',
-  'VCC-june-3.jpg',
-  'VCC-june-4.jpg',
-  'VCC-june-5.jpg',
-  'VCC-june-6.jpg',
-];
-List<String> julyImageList = [
-  'VCC-july-1.jpg',
-  'VCC-july-2.jpg',
-  'VCC-july-3.jpg',
-];
+// ignore: library_prefixes
+import 'constants.dart' as Constants;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -236,7 +219,7 @@ One hand a pawn, another a pong ball, opponent choses the hand.
                                 '''),
                             CarouselSlider(
                                 options: CarouselOptions(),
-                                items: julyImageList
+                                items: Constants.julyImageList
                                     .map((item) => Container(
                                             child: Image.asset(
                                           'images/' + item,
@@ -261,7 +244,7 @@ Tournament Game 25 + 5 sec increment. Mini swiss/Quad 3 round event. Real pieces
 Rating results: http://chess.ratingsnw.com/report20-21/VijayChessClub061221.html'''),
                             CarouselSlider(
                                 options: CarouselOptions(),
-                                items: juneImageList
+                                items: Constants.juneImageList
                                     .map((item) => Container(
                                             child: Image.asset(
                                           'images/' + item,
@@ -287,7 +270,7 @@ If you would like class only or tournament only for a lower price, that's an opt
 '''),
                             CarouselSlider(
                                 options: CarouselOptions(),
-                                items: kickoffImageList
+                                items: Constants.kickoffImageList
                                     .map((item) => Container(
                                             child: Image.asset(
                                           'images/' + item,
