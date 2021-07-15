@@ -23,6 +23,11 @@ List<String> juneImageList = [
   'VCC-june-5.jpg',
   'VCC-june-6.jpg',
 ];
+List<String> julyImageList = [
+  'VCC-july-1.jpg',
+  'VCC-july-2.jpg',
+  'VCC-july-3.jpg',
+];
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -112,7 +117,8 @@ Rating:
                   style: Theme.of(context).textTheme.headline5,
                 ),
                 ExpandablePanel(
-                  header: Text('VCC July OTB Tournament : July 10th',
+                  header: Text(
+                      'VCC Summer OTB Tournament + Knockout Chess Pong! : July 30th',
                       style: Theme.of(context).textTheme.subtitle1),
                   collapsed: FutureBuilder<QuerySnapshot>(
                       future: players.get(),
@@ -129,8 +135,7 @@ Rating:
                           Map<String, dynamic>? data =
                               doc.data() as Map<String, dynamic>?;
                           if (data != null &&
-                              data['status'].toString().toLowerCase() ==
-                                  'confirmed') {
+                              data['status'].toString() == 'summer') {
                             players.add(Player(
                                 status: data['status'],
                                 id: data['ID'],
@@ -143,7 +148,7 @@ Rating:
 
                         return Column(children: [
                           Text(
-                              'Roster is now all set, all spots are now filled, please email if you want to be on waitlist or for future anouncements'),
+                              'Roster as of now, will add players as they confirm, cap at 12'),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: DataTable(
@@ -193,6 +198,10 @@ First round starts at 10, should be done by around 1PM. Pizza will be served as 
 Masks are required for entire duration.
 Tournament Game 25 + 5 sec increment. Quad 3 round event. Real pieces, real clock, real notation.
 
+After the quads are done, we will start the chess pong knockout. Either 4 or 8 players
+Format, best of 5 games. Alternate blitz chess (3+1) + ping pong, if score is even after 4 rounds, tie breaker is decided by choose hand.
+One hand a pawn, another a pong ball, opponent choses the hand. 
+
 \$30 entry fee. Prize fund 50% of entree fees + trophies for winners. Special prize for notation accuracy.'''),
                 ),
                 SizedBox(height: 16),
@@ -218,6 +227,25 @@ Tournament Game 25 + 5 sec increment. Quad 3 round event. Real pieces, real cloc
                   expanded: Column(children: [
                     ExpandableNotifier(
                       child: ExpandablePanel(
+                          header: Text('VCC Class + Tournament: July 10th',
+                              style: Theme.of(context).textTheme.subtitle1),
+                          collapsed: Text(''),
+                          expanded: Column(children: [
+                            Text(
+                                '''We had a great turnout for this event with 10 kids and 2 adults joined as eveners.
+                                '''),
+                            CarouselSlider(
+                                options: CarouselOptions(),
+                                items: julyImageList
+                                    .map((item) => Container(
+                                            child: Image.asset(
+                                          'images/' + item,
+                                        )))
+                                    .toList()),
+                          ])),
+                    ),
+                    ExpandableNotifier(
+                      child: ExpandablePanel(
                           header: Text('VCC Class + Tournament: Jun 12th',
                               style: Theme.of(context).textTheme.subtitle1),
                           collapsed: Text(''),
@@ -229,7 +257,8 @@ Masks are required for class time. Capped at max 10 players
 Class will be focused on opening principles and exploitation of opening mistakes.
 Tournament Game 25 + 5 sec increment. Mini swiss/Quad 3 round event. Real pieces, real clock, real notation.
 
-\$50 entry fee. Prize fund 50% of entree fees. Special prize for notation accuracy.'''),
+\$50 entry fee. Prize fund 50% of entree fees. Special prize for notation accuracy.
+Rating results: http://chess.ratingsnw.com/report20-21/VijayChessClub061221.html'''),
                             CarouselSlider(
                                 options: CarouselOptions(),
                                 items: juneImageList
