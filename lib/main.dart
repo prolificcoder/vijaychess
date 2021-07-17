@@ -101,7 +101,7 @@ Rating:
                 ),
                 ExpandablePanel(
                   header: Text(
-                      'VCC Summer OTB Tournament + Knockout Chess Pong! : July 30th',
+                      'VCC Summer OTB Tournament + Knockout Chess Pong! : July 31st',
                       style: Theme.of(context).textTheme.subtitle1),
                   collapsed: FutureBuilder<QuerySnapshot>(
                       future: players.get(),
