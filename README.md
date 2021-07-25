@@ -5,3 +5,6 @@ Flutter project that hosts the code for <https://vijaychessclub.com/>
 
 Currently only on web
 
+## Flow chart
+https://miro.com/app/board/o9J_l5gYZAE=/
+
