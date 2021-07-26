@@ -118,6 +118,7 @@ Rating:
                           Map<String, dynamic>? data =
                               doc.data() as Map<String, dynamic>?;
                           if (data != null &&
+                              data['status'] != null &&
                               (data['status'].toString() == 'Confirmed' ||
                                   data['status'].toString() == 'Available')) {
                             players.add(Player(
