@@ -89,7 +89,7 @@ Rating:
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(12.0),
           child: Center(
             child: Column(
               children: <Widget>[
@@ -97,9 +97,11 @@ Rating:
                   'Over the board outdoor chess by National Master - Satyajit Malugu',
                   style: Theme.of(context).textTheme.headline5,
                 ),
+                SizedBox(height: 8),
                 Image(image: AssetImage('images/Trophies.jpg')),
                 ExpandablePanel(
-                  header: Text('Advance your chess through analysis'),
+                  header: Text('Advance your chess through analysis',
+                      style: Theme.of(context).textTheme.subtitle1),
                   expanded: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -128,9 +130,10 @@ Rating:
                             Linkify(
                                 text:
                                     'Another full event with ping pong side event! Rating results at http://chess.ratingsnw.com/report20-21/VijayChessClub073121.html.'),
+                            SizedBox(height: 8),
                             CarouselSlider(
                                 options: CarouselOptions(),
-                                items: Constants.julyImageList
+                                items: Constants.pongImageList
                                     .map((item) => Container(
                                             child: Image.asset(
                                           'images/' + item,

@@ -16,3 +16,10 @@ const List<String> julyImageList = [
   'VCC-july-2.jpg',
   'VCC-july-3.jpg',
 ];
+
+const List<String> pongImageList = [
+  'VCC-pong-1.jpg',
+  'VCC-pong-2.jpg',
+  'VCC-pong-3.jpg',
+  'VCC-pong-4.jpg',
+];
