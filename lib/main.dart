@@ -83,8 +83,6 @@ Rating:
     if (!_initialized) {
       return CircularProgressIndicator();
     }
-    final players = FirebaseFirestore.instance.collection('VCC-July');
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -99,97 +97,7 @@ Rating:
                   'Over the board outdoor chess by National Master - Satyajit Malugu',
                   style: Theme.of(context).textTheme.headline5,
                 ),
-                ExpandablePanel(
-                  header: Text(
-                      'VCC Summer OTB Tournament + Knockout Chess Pong! : July 31st',
-                      style: Theme.of(context).textTheme.subtitle1),
-                  collapsed: FutureBuilder<QuerySnapshot>(
-                      future: players.get(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
-                          return Text("Something went wrong ${snapshot.error}");
-                        }
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Text("loading...");
-                        }
-                        List<Player> players = [];
-                        for (var doc in snapshot.data!.docs) {
-                          Map<String, dynamic>? data =
-                              doc.data() as Map<String, dynamic>?;
-                          if (data != null &&
-                              data['status'] != null &&
-                              (data['status'].toString() == 'Confirmed' ||
-                                  data['status'].toString() == 'Available')) {
-                            players.add(Player(
-                                status: data['status'],
-                                id: data['ID'],
-                                firstName: data['first_name'],
-                                lastName: data['last_name'],
-                                rating: int.parse(data['rating'])));
-                          }
-                        }
-                        players.sort((b, a) => a.rating.compareTo(b.rating));
-
-                        return Column(children: [
-                          Text(
-                              'Roster as of now, will add players as they confirm, cap at 12'),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: DataTable(
-                                columns: [
-                                  DataColumn(
-                                      label: Text(
-                                    'Status',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  )),
-                                  DataColumn(
-                                      label: Text(
-                                    'First Name',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  )),
-                                  DataColumn(
-                                      label: Text(
-                                    'Last Name',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  )),
-                                  DataColumn(
-                                      label: Text(
-                                    'Rating',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  )),
-                                ],
-                                rows: List<DataRow>.generate(
-                                    players.length,
-                                    (index) => DataRow(cells: [
-                                          DataCell(Text(players[index].status)),
-                                          DataCell(
-                                              Text(players[index].firstName)),
-                                          DataCell(
-                                              Text(players[index].lastName)),
-                                          DataCell(Text(players[index]
-                                              .rating
-                                              .toString())),
-                                        ]))),
-                          ),
-                        ]);
-                      }),
-                  expanded: Text('''Over the board tournament and pizza
-First round starts at 10, should be done by around 1PM. Pizza will be served as lunch. 
-Masks are required for entire duration.
-Tournament Game 25 + 5 sec increment. Quad 3 round event. Real pieces, real clock, real notation.
-
-After the quads are done, we will start the chess pong knockout. Either 4 or 8 players
-Format, best of 5 games. Alternate blitz chess (3+1) + ping pong, if score is even after 4 rounds, tie breaker is decided by choose hand.
-One hand a pawn, another a pong ball, opponent choses the hand. 
-
-\$30 entry fee. Prize fund 50% of entree fees + trophies for winners. Special prize for notation accuracy.'''),
-                ),
-                SizedBox(height: 16),
+                Image(image: AssetImage('images/Trophies.jpg')),
                 ExpandablePanel(
                   header: Text('Advance your chess through analysis'),
                   expanded: Column(
@@ -210,6 +118,26 @@ One hand a pawn, another a pong ball, opponent choses the hand.
                       style: Theme.of(context).textTheme.subtitle1),
                   collapsed: Text(''),
                   expanded: Column(children: [
+                    ExpandableNotifier(
+                      child: ExpandablePanel(
+                          header: Text(
+                              'VCC Summer OTB Tournament + Knockout Chess Pong! : July 31st',
+                              style: Theme.of(context).textTheme.subtitle1),
+                          collapsed: Text(''),
+                          expanded: Column(children: [
+                            Linkify(
+                                text:
+                                    'Another full event with ping pong side event! Rating results at http://chess.ratingsnw.com/report20-21/VijayChessClub073121.html.'),
+                            CarouselSlider(
+                                options: CarouselOptions(),
+                                items: Constants.julyImageList
+                                    .map((item) => Container(
+                                            child: Image.asset(
+                                          'images/' + item,
+                                        )))
+                                    .toList()),
+                          ])),
+                    ),
                     ExpandableNotifier(
                       child: ExpandablePanel(
                           header: Text('VCC Class + Tournament: July 10th',
