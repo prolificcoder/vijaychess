@@ -8,6 +8,8 @@ Flutter project that hosts the code for <https://vijaychessclub.com/>
 
 Currently supports web and android.
 
+iOS coming soon
+
 
 ## Flow chart
 https://miro.com/app/board/o9J_l5gYZAE=/
