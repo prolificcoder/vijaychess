@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:mailto/mailto.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // ignore: library_prefixes
@@ -19,18 +20,27 @@ class VCCApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Vijay chess club',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Vijay chess club'),
+      title: 'Vijay Chess Club',
+      builder: (context, widget) => ResponsiveWrapper.builder(
+          BouncingScrollWrapper.builder(context, widget!),
+          maxWidth: 1200,
+          minWidth: 450,
+          defaultScale: true,
+          breakpoints: [
+            ResponsiveBreakpoint.resize(450, name: MOBILE),
+            ResponsiveBreakpoint.autoScale(800, name: TABLET),
+            ResponsiveBreakpoint.autoScale(1000, name: TABLET),
+            ResponsiveBreakpoint.resize(1200, name: DESKTOP),
+          ],
+          background: Container(color: Color(0xFFF5F5F5))),
+      initialRoute: '/',
+      routes: {'/': (context) => MyHomePage()},
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+  MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -83,7 +93,7 @@ Rating:
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Vijay Chess Club'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -302,16 +312,4 @@ A quote from a 12 yr old student's parent "Thanks to your coaching, he has been 
       ],
     );
   }
-
-  // List<DataRow> _createRows(QuerySnapshot snapshot) {
-  //   List<DataRow> newList =
-  //       snapshot.docs.map((DocumentSnapshot documentSnapshot) {
-  //     return new DataRow(cells: [
-  //       DataCell(Text(
-  //           documentSnapshot.data()["someDataYouWantToProcessForCellData"]))
-  //     ]);
-  //   }).toList();
-
-  //   return newList;
-  // }
 }
