@@ -14,3 +14,10 @@ iOS coming soon
 ## Flow chart
 https://miro.com/app/board/o9J_l5gYZAE=/
 
+## Useful commands
+
+To run only web 
+`flutter run -d chrome`
+
+
+
