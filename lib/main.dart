@@ -107,21 +107,6 @@ Rating:
                 ),
                 SizedBox(height: 8),
                 Image(image: AssetImage('images/Trophies.jpg')),
-                ExpandablePanel(
-                  header: Text('Advance your chess through analysis',
-                      style: Theme.of(context).textTheme.subtitle1),
-                  expanded: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                            'Small group analysis sessions for motivated students, who are spending ~10 hours on chess a week.'),
-                        Text(
-                            'Format: 45 mins session, price \$30, expect 2 hours of home work. We will pick a game that students played and analyze over the board without computers help. I will teach the analysis technique and refine students work.'),
-                        Text(
-                            'Either OTB or online over skype on a real board (no computers allowed). You will need a book and pencil')
-                      ]),
-                  collapsed: Text(''),
-                ),
                 SizedBox(height: 16),
                 ExpandablePanel(
                   header: Text('Past events',
