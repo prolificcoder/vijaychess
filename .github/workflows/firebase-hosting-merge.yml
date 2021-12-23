@@ -14,18 +14,18 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: beta
-      - run: flutter pub get
-      - uses: actions/checkout@v2
-      - run: flutter test
-      - run: flutter analyze
-      - run: flutter build web
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_VIJAYCHESS_8B221 }}"
-          channelId: live
-          projectId: vijaychess-8b221
-      - uses: actions/setup-java@v1
+      - name: Melos activate and bootstrap 
+        run: |
+          dart pub global activate melos
+          melos bootstrap
+      - name: Lint main and subpackage
+        run: melos exec flutter analyze
+      - name: Run all tests
+        run: melos exec flutter test
+      - name: Build web binary
+        run: flutter build web
+      - name: Build android apk
+        uses: actions/setup-java@v1
         with:
           java-version: '12.x'
       - name: Download Android keystore
@@ -40,8 +40,8 @@ jobs:
           echo "storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" >> android/key.properties
           echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/key.properties
           echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties
-      - name: Build Android App Bundle
-        run: flutter build appbundle
+      - run: flutter build apk
+
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
