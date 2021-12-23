@@ -19,5 +19,7 @@ https://miro.com/app/board/o9J_l5gYZAE=/
 To run only web 
 `flutter run -d chrome`
 
+To run on all platforms available 
+`flutter run -d all`
 
 
