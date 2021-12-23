@@ -9,9 +9,10 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: beta
-      - run: dart pub global activate --source="path" . --executable="melos"
-      - run: melos bootstrap
-      - uses: actions/checkout@v2
+      - name: Melos activate and bootstrap 
+        run: |
+          dart pub global activate --source="path" . --executable="melos"
+          melos bootstrap
       - run: melos exec flutter test
       - run: melos exec flutter analyze
       - run: flutter build web
