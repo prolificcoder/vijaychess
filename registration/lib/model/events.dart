@@ -5,13 +5,13 @@ class Event {
   late final String location;
   late final DateTime eventTime;
   late final String organizer;
-  late List<Player> players;
+  List<Player> players;
 
   Event({
     required this.name,
     required this.location,
     required this.eventTime,
     required this.organizer,
-  });
+  }) : players = [];
 
 }
