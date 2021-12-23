@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:expandable/expandable.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:mailto/mailto.dart';
@@ -9,35 +8,8 @@ import 'package:url_launcher/url_launcher.dart';
 // ignore: library_prefixes
 import 'constants.dart' as Constants;
 
-class LandingPage extends StatefulWidget {
+class LandingPage extends StatelessWidget {
   LandingPage({Key? key}) : super(key: key);
-
-  @override
-  _LandingPageState createState() => _LandingPageState();
-}
-
-class _LandingPageState extends State<LandingPage> {
-  bool _initialized = false;
-  bool _error = false;
-
-  void initializedFlutterFire() async {
-    try {
-      await Firebase.initializeApp();
-      setState(() {
-        _initialized = true;
-      });
-    } catch (e) {
-      setState(() {
-        _error = true;
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    initializedFlutterFire();
-    super.initState();
-  }
 
   void _openEmailIntent() async {
     final mailtoLink = Mailto(
@@ -55,12 +27,6 @@ Rating:
 
   @override
   Widget build(BuildContext context) {
-    if (_error) {
-      return ErrorWidget(_error);
-    }
-    if (!_initialized) {
-      return CircularProgressIndicator();
-    }
     return Scaffold(
       appBar: AppBar(
         title: Text('Vijay Chess Club'),
