@@ -11,7 +11,7 @@ jobs:
           channel: beta
       - name: Melos activate and bootstrap 
         run: |
-          dart pub global activate --executable="melos"
+          dart pub global activate melos
           melos bootstrap
       - run: melos exec flutter test
       - run: melos exec flutter analyze
