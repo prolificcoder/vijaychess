@@ -19,5 +19,5 @@ jobs:
         run: melos exec flutter test
       - name: Build web binary
         run: flutter build web
-      - id: android
-        uses: actions/build_android@v1
+      - name: build android
+        uses: prolificcoder/vijaychess@v1
