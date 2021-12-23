@@ -20,7 +20,7 @@ void main() {
     await tester.idle();
     await tester.pump();
 
-    // expect(find.text('Vijay Chess Club'), findsOneWidget);
-    // expect(find.text('About'), findsOneWidget);
+    expect(find.text('Vijay Chess Club'), findsOneWidget);
+    expect(find.text('About'), findsOneWidget);
   });
 }
