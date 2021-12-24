@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:vijaychess/landing_page.dart';
-import 'package:vijaychess/register_page.dart';
+import 'package:vijaychess/players_screen.dart';
+import 'package:vijaychess/register_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,14 +34,16 @@ class VCCApp extends StatelessWidget {
 
   final _router = GoRouter(
     routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) => LandingPage(),
-      ),
-      GoRoute(
-        path: '/register',
-        builder: (context, state) => RegisterPage(),
-      )
+      GoRoute(path: '/', builder: (context, state) => LandingPage(), routes: [
+        GoRoute(
+          path: 'events',
+          builder: (context, state) => EventsScreen(),
+        ),
+        GoRoute(
+          path: 'players',
+          builder: (context, state) => PlayersScreen(),
+        ),
+      ]),
     ],
   );
 }
