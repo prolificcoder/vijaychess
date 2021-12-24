@@ -1,0 +1,5 @@
+name: vijay_chess_club
+
+packages:
+  - /**
+  - packages/**

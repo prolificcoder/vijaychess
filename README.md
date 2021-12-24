@@ -2,6 +2,8 @@
 
 <a href='https://play.google.com/store/apps/details?id=com.malugu.vijaychess&hl=en_US&gl=US&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' height=60 width=150 src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 
+[![melos](https://img.shields.io/badge/maintained%20with-melos-f700ff.svg?style=flat-square)](https://github.com/invertase/melos)
+
 # vijaychess
 
 Flutter project that hosts the code for <https://vijaychessclub.com/>
