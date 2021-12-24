@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class EventsScreen extends StatelessWidget {
-  EventsScreen({Key? key}) : super(key: key);
+class EventsCreateScreen extends StatelessWidget {
+  EventsCreateScreen({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
 
