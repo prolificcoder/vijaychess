@@ -10,6 +10,21 @@ class Player {
       required this.id,
       required this.rating,
       required this.status});
-  // factory Player.fromFireStore(Map<String, dynamic> json) => _$PersonFromJson(json);
-  // Map<String, dynamic> toJson() => _$PersonToJson(this);
+  Player.fromFireStore(Map<String, dynamic> json)
+      : this(
+          firstName: json['first_name']! as String,
+          lastName: json['last_name']! as String,
+          id: json['ID']! as String,
+          rating: int.parse(json['rating']! as String),
+          status: json['status']! as String,
+        );
+  Map<String, dynamic> toJson() {
+    return {
+      'first_name': firstName,
+      'last_name': lastName,
+      'id': id,
+      'rating': rating,
+      'status': status
+    };
+  }
 }
