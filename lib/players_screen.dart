@@ -60,10 +60,11 @@ class _PlayersScreenState extends State<PlayersScreen> {
         body: Column(children: [
           Expanded(
             child: FirestoreListView<Player>(
-              query: players,
+              query: players.orderBy('first_name'),
               itemBuilder: (context, snapshot) {
                 Player player = snapshot.data();
-                return Text('Player name is ${player.firstName}');
+                return Text(
+                    '${player.firstName} ${player.lastName} rating ${player.rating}');
               },
             ),
           ),

@@ -29,6 +29,7 @@ dependencies:
   url_launcher: ^6.0.4
   registration: 
     path: packages/registration
+  flutter_form_builder: ^7.0.0
 
 dev_dependencies:
   flutter_test:
