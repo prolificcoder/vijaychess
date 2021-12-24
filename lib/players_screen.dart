@@ -54,7 +54,7 @@ class _PlayersScreenState extends State<PlayersScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Players'),
+          title: Text('Players list'),
         ),
         body: FirestoreListView<Player>(
           query: players,
