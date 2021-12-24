@@ -6,7 +6,7 @@ description: Vijay chess club info and events
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 #Git pre commit hook auto updates this patch version
-version: 1.0.1+9
+version: 1.0.1+10
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -27,6 +27,8 @@ dependencies:
   mailto: ^2.0.0
   responsive_framework: ^0.1.4
   url_launcher: ^6.0.4
+  registration: 
+    path: packages/registration
 
 dev_dependencies:
   flutter_test:
