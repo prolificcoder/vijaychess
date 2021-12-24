@@ -14,8 +14,8 @@ class Player {
       : this(
           firstName: json['first_name']! as String,
           lastName: json['last_name']! as String,
-          id: json['id']! as String,
-          rating: json['rating']! as int,
+          id: json['ID']! as String,
+          rating: int.parse(json['rating']! as String),
           status: json['status']! as String,
         );
   Map<String, dynamic> toJson() {

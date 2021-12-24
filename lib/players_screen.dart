@@ -59,8 +59,8 @@ class _PlayersScreenState extends State<PlayersScreen> {
         body: FirestoreListView<Player>(
           query: players,
           itemBuilder: (context, snapshot) {
-            Player user = snapshot.data();
-            return Text('Player name is ${user.firstName}');
+            Player player = snapshot.data();
+            return Text('Player name is ${player.firstName}');
           },
         ));
   }
