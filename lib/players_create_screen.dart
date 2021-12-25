@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:registration/model/players.dart';
 
 class PlayersCreateScreen extends StatelessWidget {
@@ -24,15 +24,22 @@ class PlayersCreateScreen extends StatelessWidget {
       body: Column(children: [
         FormBuilder(
             key: _formKey,
+            autoFocusOnValidationFailure: true,
             child: Column(
               children: [
                 FormBuilderTextField(
                   name: "first_name",
                   decoration: InputDecoration(labelText: "Enter first name"),
+                  validator: FormBuilderValidators.compose(
+                      [FormBuilderValidators.required(context)]),
                 ),
                 FormBuilderTextField(
                   name: "last_name",
                   decoration: InputDecoration(labelText: "Enter last name"),
+                  validator: FormBuilderValidators.compose([
+                    FormBuilderValidators.required(context,
+                        errorText: 'Last name is required')
+                  ]),
                 ),
                 FormBuilderTextField(
                   name: "nwsrs_id",
@@ -40,12 +47,19 @@ class PlayersCreateScreen extends StatelessWidget {
                       labelText: "Enter nwsrs id (not USCF or FIDE)"),
                 ),
                 FormBuilderTextField(
-                  name: "rating",
-                  decoration:
-                      InputDecoration(labelText: "Enter current rating"),
-                ),
+                    name: "rating",
+                    keyboardType: TextInputType.number,
+                    decoration:
+                        InputDecoration(labelText: "Enter current rating"),
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(context),
+                      FormBuilderValidators.numeric(context,
+                          errorText: 'Rating has to be numeric'),
+                      FormBuilderValidators.max(context, 4),
+                    ])),
                 FormBuilderTextField(
                   name: "status",
+                  initialValue: "Available",
                   decoration:
                       InputDecoration(labelText: "Enter status (available)"),
                 ),
