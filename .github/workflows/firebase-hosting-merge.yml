@@ -24,6 +24,13 @@ jobs:
         run: melos exec flutter test
       - name: Build web binary
         run: flutter build web
+      - name: Deploy latest bits to web
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_VIJAYCHESS_8B221 }}"
+          channelId: live
+          projectId: vijaychess-8b221
       - name: Build android apk
         uses: actions/setup-java@v1
         with:
@@ -40,8 +47,8 @@ jobs:
           echo "storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" >> android/key.properties
           echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/key.properties
           echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties
-      - run: flutter build appbundle
-
+      - name: Build android appbundle
+        run: flutter build appbundle
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
@@ -59,7 +66,7 @@ jobs:
           gem install bundler:2.0.2
           bundle config path vendor/bundle
           bundle install
-      - name: Release to Google Play (beta)
+      - name: Release to Google Play - production
         env:
           SUPPLY_PACKAGE_NAME: ${{ secrets.ANDROID_PACKAGE_NAME }}
           SUPPLY_JSON_KEY_DATA: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
