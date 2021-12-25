@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:vijaychess/landing_page.dart';
-import 'package:vijaychess/main.dart';
 
 void main() {
   MaterialApp app = MaterialApp(
