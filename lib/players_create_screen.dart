@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
 import 'package:registration/model/players.dart';
 
 class PlayersCreateScreen extends StatelessWidget {
@@ -20,42 +21,52 @@ class PlayersCreateScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Players'),
       ),
-      body: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              FormBuilderTextField(
-                name: "first_name",
-                decoration: InputDecoration(labelText: "Enter first name"),
-              ),
-              FormBuilderTextField(
-                name: "last_name",
-                decoration: InputDecoration(labelText: "Enter last name"),
-              ),
-              FormBuilderTextField(
-                name: "rating",
-                decoration: InputDecoration(labelText: "Enter current rating"),
-              ),
-              FormBuilderTextField(
-                name: "status",
-                decoration:
-                    InputDecoration(labelText: "Enter status (available)"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.saveAndValidate()) {
-                    players.add(Player(
-                        firstName: _formKey.currentState!.value['first_name'],
-                        lastName: _formKey.currentState!.value['last_name'],
-                        rating: _formKey.currentState!.value['rating'],
-                        status: _formKey.currentState!.value['status'],
-                        id: players.id));
-                  }
-                },
-                child: const Text('Create'),
-              ),
-            ],
-          )),
+      body: Column(children: [
+        FormBuilder(
+            key: _formKey,
+            child: Column(
+              children: [
+                FormBuilderTextField(
+                  name: "first_name",
+                  decoration: InputDecoration(labelText: "Enter first name"),
+                ),
+                FormBuilderTextField(
+                  name: "last_name",
+                  decoration: InputDecoration(labelText: "Enter last name"),
+                ),
+                FormBuilderTextField(
+                  name: "nwsrs_id",
+                  decoration: InputDecoration(
+                      labelText: "Enter nwsrs id (not USCF or FIDE)"),
+                ),
+                FormBuilderTextField(
+                  name: "rating",
+                  decoration:
+                      InputDecoration(labelText: "Enter current rating"),
+                ),
+                FormBuilderTextField(
+                  name: "status",
+                  decoration:
+                      InputDecoration(labelText: "Enter status (available)"),
+                ),
+              ],
+            )),
+        ElevatedButton(
+          onPressed: () {
+            if (_formKey.currentState!.saveAndValidate()) {
+              players.add(
+                Player(
+                    firstName: _formKey.currentState!.value['first_name'],
+                    lastName: _formKey.currentState!.value['last_name'],
+                    rating: int.parse(_formKey.currentState!.value['rating']),
+                    status: _formKey.currentState!.value['status'],
+                    nwsrsId: _formKey.currentState!.value['nwsrs_id']),
+              );
+            }
+          },
+          child: const Text('Create'),
+        ),
+      ]),
     );
   }
 }
