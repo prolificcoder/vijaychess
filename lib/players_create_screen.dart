@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:go_router/go_router.dart';
 import 'package:registration/model/players.dart';
 
 class PlayersCreateScreen extends StatelessWidget {
@@ -44,7 +45,12 @@ class PlayersCreateScreen extends StatelessWidget {
                 FormBuilderTextField(
                   name: "nwsrs_id",
                   decoration: InputDecoration(
-                      labelText: "Enter nwsrs id (not USCF or FIDE)"),
+                      labelText:
+                          "Enter nwsrs id from http://chess.ratingsnw.com/ratings.html)"),
+                  validator: FormBuilderValidators.compose([
+                    FormBuilderValidators.required(context),
+                    FormBuilderValidators.max(context, 8),
+                  ]),
                 ),
                 FormBuilderTextField(
                     name: "rating",
@@ -55,13 +61,13 @@ class PlayersCreateScreen extends StatelessWidget {
                       FormBuilderValidators.required(context),
                       FormBuilderValidators.numeric(context,
                           errorText: 'Rating has to be numeric'),
-                      FormBuilderValidators.max(context, 4),
+                      FormBuilderValidators.maxLength(context, 4),
                     ])),
                 FormBuilderTextField(
                   name: "status",
                   initialValue: "Available",
-                  decoration:
-                      InputDecoration(labelText: "Enter status (available)"),
+                  decoration: InputDecoration(
+                      labelText: "Enter status to play tournaments"),
                 ),
               ],
             )),
@@ -75,6 +81,15 @@ class PlayersCreateScreen extends StatelessWidget {
                     rating: int.parse(_formKey.currentState!.value['rating']),
                     status: _formKey.currentState!.value['status'],
                     nwsrsId: _formKey.currentState!.value['nwsrs_id']),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Player created')),
+              );
+              context.pop();
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                    content: Text('Error creating player, try again')),
               );
             }
           },

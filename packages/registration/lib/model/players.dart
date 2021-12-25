@@ -22,6 +22,7 @@ class Player {
     return {
       'first_name': firstName,
       'last_name': lastName,
+      'ID': nwsrsId,
       'rating': rating,
       'status': status
     };
