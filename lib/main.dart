@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:vijaychess/events_create_screen.dart';
@@ -16,6 +17,12 @@ class VCCApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      supportedLocales: [
+        Locale('en'),
+      ],
+      localizationsDelegates: [
+        FormBuilderLocalizations.delegate,
+      ],
       routeInformationParser: _router.routeInformationParser,
       routerDelegate: _router.routerDelegate,
       title: 'Vijay Chess Club',

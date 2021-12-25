@@ -6,17 +6,25 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vijaychess/main.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:vijaychess/landing_page.dart';
 
 void main() {
+  MaterialApp app = MaterialApp(
+    localizationsDelegates: [
+      FormBuilderLocalizations.delegate,
+    ],
+    home: LandingPage(),
+  );
   testWidgets('Static data test', (WidgetTester tester) async {
     final firestore = FakeFirebaseFirestore();
     await firestore.collection('VCC-July').add({
       'first_name': 'Sankalp',
     });
     // Build our app and trigger a frame.
-    await tester.pumpWidget(VCCApp());
+    await tester.pumpWidget(app);
     await tester.idle();
     await tester.pump();
 

@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mailto/mailto.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -175,8 +176,13 @@ Resources available over the internet for chess improvement are vast and I will 
                               header: Text('Motivation',
                                   style: Theme.of(context).textTheme.subtitle2),
                               collapsed: Text(''),
-                              expanded: Text(
-                                  "My dad's (now expired) name is Vijaya Kumar, he taught me how pieces move when I was 6 but what is extra ordinary is that he kept on pushing me go for chess coaching and he didn't rest until he found a great coach for me. He never said no for coaching or money for tournament or skipping school for practise, he completely believed in me. I hope to motivate my son as much as my dad motivates me everyday to do my best. Vijay means winning(or winner) I hope students here win what they are after!")),
+                              expanded: GestureDetector(
+                                onLongPress: () {
+                                  context.go('/players');
+                                },
+                                child: Text(
+                                    "My dad's (now expired) name is Vijaya Kumar, he taught me how pieces move when I was 6 but what is extra ordinary is that he kept on pushing me go for chess coaching and he didn't rest until he found a great coach for me. He never said no for coaching or money for tournament or skipping school for practise, he completely believed in me. I hope to motivate my son as much as my dad motivates me everyday to do my best. Vijay means winning(or winner) I hope students here win what they are after!"),
+                              )),
                         ),
                         SizedBox(height: 16),
                         ExpandableNotifier(
