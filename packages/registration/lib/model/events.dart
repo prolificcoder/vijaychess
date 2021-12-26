@@ -3,15 +3,32 @@ import 'package:registration/model/players.dart';
 class Event {
   late final String name;
   late final String location;
-  late final DateTime eventTime;
-  late final String organizer;
-  List<Player> players;
+  late final DateTime eventDay;
+  //Might need eventEndDay
+  late final String organizer; //could be entity with goggle account
+  List<Player>
+      players; //figure out a way to store this relationship in cloud store
 
   Event({
     required this.name,
     required this.location,
-    required this.eventTime,
+    required this.eventDay,
     required this.organizer,
   }) : players = [];
 
+  Event.fromFireStore(Map<String, dynamic> json)
+      : this(
+            name: json['name']! as String,
+            location: json['location']! as String,
+            eventDay: DateTime.parse(json['eventDay']!.toDate().toString()),
+            organizer: json['organizer'] as String);
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'location': location,
+      'eventDay': eventDay,
+      'organizer': organizer
+    };
+  }
 }

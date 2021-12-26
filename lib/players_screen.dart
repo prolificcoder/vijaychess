@@ -20,23 +20,30 @@ class PlayersScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text('Players list'),
         ),
-        body: Column(children: [
-          Expanded(
-            child: FirestoreListView<Player>(
-              query: players.orderBy('first_name'),
-              itemBuilder: (context, snapshot) {
-                Player player = snapshot.data();
-                return Text(
-                    '${player.firstName} ${player.lastName} rating ${player.rating}');
-              },
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(children: [
+            Expanded(
+              child: FirestoreListView<Player>(
+                query: players.orderBy('first_name'),
+                itemBuilder: (context, snapshot) {
+                  Player player = snapshot.data();
+                  return ListTile(
+                    title: Text('${player.firstName} ${player.lastName}'),
+                    subtitle: Text(
+                        '${player.rating.toString()} \n ${player.nwsrsId}'),
+                    isThreeLine: true,
+                  );
+                },
+              ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              context.go('/players/new');
-            },
-            child: const Text('Create new player'),
-          ),
-        ]));
+            ElevatedButton(
+              onPressed: () {
+                context.go('/players/new');
+              },
+              child: const Text('Create new player'),
+            ),
+          ]),
+        ));
   }
 }

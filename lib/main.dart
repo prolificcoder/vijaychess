@@ -10,6 +10,7 @@ import 'package:vijaychess/landing_page.dart';
 import 'package:vijaychess/players_create_screen.dart';
 import 'package:vijaychess/players_screen.dart';
 import 'package:vijaychess/events_screen.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +22,7 @@ void main() async {
   } else {
     await Firebase.initializeApp();
   }
+  initializeDateFormatting();
   runApp(VCCApp());
 }
 

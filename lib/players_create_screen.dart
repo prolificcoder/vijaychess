@@ -20,7 +20,7 @@ class PlayersCreateScreen extends StatelessWidget {
             toFirestore: (player, _) => player.toJson());
     return Scaffold(
       appBar: AppBar(
-        title: Text('Players'),
+        title: Text('Add a new player'),
       ),
       body: Column(children: [
         FormBuilder(
