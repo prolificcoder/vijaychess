@@ -1,15 +1,25 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:vijaychess/events_create_screen.dart';
+import 'package:vijaychess/firebase_options.dart';
 import 'package:vijaychess/landing_page.dart';
 import 'package:vijaychess/players_create_screen.dart';
 import 'package:vijaychess/players_screen.dart';
 import 'package:vijaychess/events_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
   runApp(VCCApp());
 }
 
