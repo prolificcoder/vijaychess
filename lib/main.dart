@@ -13,6 +13,7 @@ import 'package:vijaychess/events_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //Note: This conditional is needed https://stackoverflow.com/a/70296143/31252
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
