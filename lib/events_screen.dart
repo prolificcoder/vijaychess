@@ -14,7 +14,7 @@ class EventsScreen extends StatelessWidget {
         .withConverter<Event>(
             fromFirestore: (snapshot, _) =>
                 Event.fromFireStore(snapshot.data()!),
-            toFirestore: (player, _) => player.toJson());
+            toFirestore: (event, _) => event.toJson());
     return Scaffold(
         appBar: AppBar(
           title: Text('Events list'),
