@@ -14,7 +14,7 @@ void main() {
         name: "main",
         location: "Seattle",
         organizer: "SJ",
-        eventTime: DateTime.now());
+        eventDay: DateTime.now());
     mainEvent.players.add(topSeed);
     assert(mainEvent.players.length == 1);
   });
