@@ -49,8 +49,3 @@ jobs:
           channel: beta
     - run: flutter pub get
     - run: flutter build ios --release --no-codesign
-    - name: Upload iPA
-      uses: actions/upload-artifact@master
-      with:
-        name: ios-build
-        path: build/ios/iphoneos
