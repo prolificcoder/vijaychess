@@ -16,7 +16,15 @@ jobs:
       - name: Lint main and subpackage
         run: melos exec flutter analyze
       - name: Run all unit tests
-        run: melos exec flutter test
+        run: melos exec flutter test --machine > test-results.json
+      # - name: Upload coverage to codecov
+      #   run: curl -s https://codecov.io/bash
+      #   shell: bash
+      - uses: actions/upload-artifact@v2 
+        if: success() || failure()       
+        with:
+          name: test-results
+          path: test-results.xml
       - name: Build web binary
         run: flutter build web
       - name: Build android apk
