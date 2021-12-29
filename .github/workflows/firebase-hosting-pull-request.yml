@@ -15,7 +15,7 @@ jobs:
           melos bootstrap
       - name: Lint main and subpackage
         run: melos exec flutter analyze
-      - name: Run all tests
+      - name: Run all unit tests
         run: melos exec flutter test
       - name: Build web binary
         run: flutter build web
@@ -51,5 +51,6 @@ jobs:
     # - run: flutter build ios --release --no-codesign
     - uses: futureware-tech/simulator-action@v1
       with:
-        model: 'iPhone 13'
-    - run: flutter test integration_test/
+        model: 'iPhone 12'
+    - name: Run all integration tests on iOS simulator
+      run: flutter test integration_test/
