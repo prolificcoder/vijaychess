@@ -15,8 +15,14 @@ jobs:
           melos bootstrap
       - name: Lint main and subpackage
         run: melos exec flutter analyze
-      - name: Run all unit tests
-        run: melos exec flutter test
+      - name: Run unit tests and store tests in json file
+        run: flutter test --machine > unit-test-results.json
+      - uses: dorny/test-reporter@v1
+        if: success() || failure()       
+        with:
+          name: Widget and unit tests
+          path: unit-test-results.json
+          reporter: flutter-json
       - name: Build web binary
         run: flutter build web
       - name: Build android apk
@@ -36,8 +42,8 @@ jobs:
           echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/key.properties
           echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties
       - run: flutter build apk
-  build_ios:
-    name: Build Flutter (iOS)
+  build_ios_integration_tests:
+    name: Build iOS and run integration tests
     runs-on: macOS-latest
     steps:
     - uses: actions/checkout@v1
