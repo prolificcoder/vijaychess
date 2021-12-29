@@ -15,13 +15,21 @@ jobs:
           melos bootstrap
       - name: Lint main and subpackage
         run: melos exec flutter analyze
-      - name: Run unit tests and store tests in json file
-        run: flutter test --machine > unit-test-results.json
+      - name: Run unit tests 
+        run: flutter test packages/registration/test
       - uses: dorny/test-reporter@v1
         if: success() || failure()       
         with:
-          name: Widget and unit tests
-          path: unit-test-results.json
+          name: Unit tests
+          path: test-results.json
+          reporter: flutter-json
+      - name: Run widget tests 
+        run: flutter test 
+      - uses: dorny/test-reporter@v1
+        if: success() || failure()       
+        with:
+          name: Widget unit tests
+          path: test-results.json
           reporter: flutter-json
       - name: Build web binary
         run: flutter build web
@@ -61,3 +69,9 @@ jobs:
         model: 'iPhone 12'
     - name: Run all integration tests on iOS simulator
       run: flutter test integration_test/
+    - uses: dorny/test-reporter@v1
+      if: success() || failure()       
+        with:
+          name: Integration E2E tests
+          path: test-results.json
+          reporter: flutter-json
