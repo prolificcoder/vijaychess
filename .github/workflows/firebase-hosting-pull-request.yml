@@ -60,10 +60,4 @@ jobs:
       with:
         model: 'iPhone 12'
     - name: Run all integration tests on iOS simulator
-      run: flutter test integration_test/ --machine > int-test-results.json
-    - uses: dorny/test-reporter@v1
-      if: success() || failure()       
-      with:
-        name: Integration tests
-        path: int-test-results.json
-        reporter: flutter-json
+      run: flutter test integration_test/
