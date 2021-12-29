@@ -15,7 +15,7 @@ jobs:
           melos bootstrap
       - name: Lint main and subpackage
         run: melos exec flutter analyze
-      - name: Run all unit tests
+      - name: Run all unit tests and store tests in json
         run: melos exec flutter test --machine > test-results.json
       # - name: Upload coverage to codecov
       #   run: curl -s https://codecov.io/bash
