@@ -30,8 +30,8 @@ class PlayersScreen extends StatelessWidget {
                   Player player = snapshot.data();
                   return ListTile(
                     title: Text('${player.firstName} ${player.lastName}'),
-                    subtitle: Text(
-                        '${player.rating.toString()} \n ${player.nwsrsId}'),
+                    subtitle:
+                        Text('${player.rating.toString()}\n${player.nwsrsId}'),
                     isThreeLine: true,
                   );
                 },
