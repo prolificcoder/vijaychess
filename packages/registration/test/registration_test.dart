@@ -18,4 +18,26 @@ void main() {
     mainEvent.players.add(topSeed);
     assert(mainEvent.players.length == 1);
   });
+  test('Verify format from firestore for player', () {
+    Player expected = Player(
+        lastName: "Seed",
+        firstName: "Top",
+        nwsrsId: "1",
+        rating: 2342,
+        status: "Ready");
+
+    var playerJson = {
+      'first_name': 'Top',
+      'last_name': 'Seed',
+      'ID': '1',
+      'rating': 2342,
+      'status': 'Ready'
+    };
+    Player actual = Player.fromFireStore(playerJson);
+    assert(expected.firstName == actual.firstName);
+    assert(expected.lastName == actual.lastName);
+    assert(expected.nwsrsId == actual.nwsrsId);
+    assert(expected.rating == actual.rating);
+    assert(expected.status == actual.status);
+  });
 }
