@@ -42,8 +42,6 @@ Rating:
                   'Over the board outdoor chess by National Master - Satyajit Malugu',
                   style: Theme.of(context).textTheme.headline5,
                 ),
-                SizedBox(height: 8),
-                Image(image: AssetImage('images/Trophies.jpg')),
                 SizedBox(height: 16),
                 ExpandablePanel(
                   header: Text('Past events',
