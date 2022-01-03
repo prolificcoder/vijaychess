@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
+import 'package:registration/model/players.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:vijaychess/events_create_screen.dart';
 import 'package:vijaychess/firebase_options.dart';
@@ -15,18 +17,26 @@ import 'package:intl/date_symbol_data_local.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //Note: This conditional is needed https://stackoverflow.com/a/70296143/31252
+  final FirebaseApp app;
   if (kIsWeb) {
-    await Firebase.initializeApp(
+    app = await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
   } else {
-    await Firebase.initializeApp();
+    app = await Firebase.initializeApp();
   }
+  final firestore = FirebaseFirestore.instanceFor(app: app);
+
+  //Needed for date form
   initializeDateFormatting();
-  runApp(VCCApp());
+  runApp(VCCApp(firestore: firestore));
 }
 
 class VCCApp extends StatelessWidget {
+  final FirebaseFirestore firestore;
+
+  VCCApp({required this.firestore});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
@@ -59,7 +69,7 @@ class VCCApp extends StatelessWidget {
       GoRoute(path: '/', builder: (context, state) => LandingPage(), routes: [
         GoRoute(
           path: 'events',
-          builder: (context, state) => EventsScreen(),
+          builder: (context, state) => EventsScreen(: {'firestore' : firestore}),
           routes: [
             GoRoute(
                 path: 'new', builder: (context, state) => EventsCreateScreen())

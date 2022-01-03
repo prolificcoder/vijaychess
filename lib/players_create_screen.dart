@@ -9,7 +9,6 @@ class PlayersCreateScreen extends StatelessWidget {
   PlayersCreateScreen({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormBuilderState>();
-
   @override
   Widget build(BuildContext context) {
     final players = FirebaseFirestore.instance
