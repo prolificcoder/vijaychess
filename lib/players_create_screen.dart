@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:registration/model/players.dart';
+import 'package:vijaychess/elevated_button_with_padding_widget.dart';
 
 class PlayersCreateScreen extends StatelessWidget {
   PlayersCreateScreen({Key? key}) : super(key: key);
@@ -71,29 +72,31 @@ class PlayersCreateScreen extends StatelessWidget {
                 ),
               ],
             )),
-        ElevatedButton(
-          onPressed: () {
-            if (_formKey.currentState!.saveAndValidate()) {
-              players.add(
-                Player(
-                    firstName: _formKey.currentState!.value['first_name'],
-                    lastName: _formKey.currentState!.value['last_name'],
-                    rating: int.parse(_formKey.currentState!.value['rating']),
-                    status: _formKey.currentState!.value['status'],
-                    nwsrsId: _formKey.currentState!.value['nwsrs_id']),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Player created')),
-              );
-              context.pop();
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                    content: Text('Error creating player, try again')),
-              );
-            }
-          },
-          child: const Text('Create'),
+        ElevatedButtonWithPadding(
+          child: ElevatedButton(
+            onPressed: () {
+              if (_formKey.currentState!.saveAndValidate()) {
+                players.add(
+                  Player(
+                      firstName: _formKey.currentState!.value['first_name'],
+                      lastName: _formKey.currentState!.value['last_name'],
+                      rating: int.parse(_formKey.currentState!.value['rating']),
+                      status: _formKey.currentState!.value['status'],
+                      nwsrsId: _formKey.currentState!.value['nwsrs_id']),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Player created')),
+                );
+                context.pop();
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      content: Text('Error creating player, try again')),
+                );
+              }
+            },
+            child: const Text('Create'),
+          ),
         ),
       ]),
     );
