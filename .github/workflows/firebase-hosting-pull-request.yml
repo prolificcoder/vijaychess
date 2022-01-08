@@ -43,7 +43,7 @@ jobs:
           echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties
       - run: flutter build apk
   build_ios_integration_tests:
-    name: Build iOS and run integration tests
+    name: Run widget and integration tests on Mac and build iOS
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v1
@@ -54,8 +54,6 @@ jobs:
         with:
           channel: beta
       - run: flutter pub get
-      - name: Build iOS app in debug mode
-        run: flutter build ios --debug --no-codesign
       - name: Run widget tests
         run: flutter test
       - uses: dorny/test-reporter@v1
@@ -64,6 +62,8 @@ jobs:
           name: Widget unit tests
           path: test-results.json
           reporter: flutter-json
+      - name: Build iOS app in debug mode
+        run: flutter build ios --debug --no-codesign
       - uses: futureware-tech/simulator-action@v1
         with:
           model: "iPhone 12"
