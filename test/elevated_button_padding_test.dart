@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
-import 'package:vijaychess/ElevatedButtonWithPadding.dart';
+import 'package:vijaychess/elevated_button_with_padding_widget.dart';
 
 void main() {
   testGoldens('Test elevated button with padding widget',

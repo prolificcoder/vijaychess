@@ -4,7 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:registration/model/players.dart';
-import 'package:vijaychess/ElevatedButtonWithPadding.dart';
+import 'package:vijaychess/elevated_button_with_padding_widget.dart';
 
 class PlayersCreateScreen extends StatelessWidget {
   PlayersCreateScreen({Key? key}) : super(key: key);
