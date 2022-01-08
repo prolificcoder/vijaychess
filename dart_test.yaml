@@ -1,2 +1,4 @@
 file_reporters:
   json: test-results.json
+tags:
+  golden:

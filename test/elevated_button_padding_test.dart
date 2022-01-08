@@ -19,6 +19,7 @@ void main() {
     await tester.idle();
     await tester.pump();
 
+    await loadAppFonts();
     expect(find.text('Test button'), findsOneWidget);
     await screenMatchesGolden(tester, 'finds elevated button');
   });

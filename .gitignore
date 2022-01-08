@@ -54,3 +54,5 @@ app.*.map.json
 /coverage/
 packages/registration/coverage/
 test-results.json
+
+**/failures/*.png
