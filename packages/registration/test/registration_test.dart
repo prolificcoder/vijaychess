@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:registration/model/events.dart';
 import 'package:registration/model/players.dart';
@@ -60,7 +62,11 @@ void main() {
     assert(expected.organizer == actual.organizer);
     assert(expected.location == actual.location);
     assert(expected.name == actual.name);
-    assert(expected.eventDay.microsecondsSinceEpoch ==
-        actual.eventDay.microsecondsSinceEpoch);
+    print('actual seconds is ${actual.eventDay.microsecondsSinceEpoch}');
+    print('expected seconds is ${expected.eventDay.microsecondsSinceEpoch}');
+    assert(
+      expected.eventDay.microsecondsSinceEpoch ==
+          actual.eventDay.microsecondsSinceEpoch,
+    );
   });
 }
