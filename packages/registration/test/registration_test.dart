@@ -46,7 +46,7 @@ void main() {
       organizer: 'TD',
       location: 'Internet',
       name: 'test guild',
-      eventDay: DateTime.parse('2021-12-31 16:00:00.0000'),
+      eventDay: DateTime.parse('2021-12-31 16:00:00'),
     );
     var eventDayObj = Timestamp(1640995200, 0);
 
@@ -60,6 +60,7 @@ void main() {
     assert(expected.organizer == actual.organizer);
     assert(expected.location == actual.location);
     assert(expected.name == actual.name);
-    assert(expected.eventDay == actual.eventDay);
+    assert(expected.eventDay.microsecondsSinceEpoch ==
+        actual.eventDay.microsecondsSinceEpoch);
   });
 }
