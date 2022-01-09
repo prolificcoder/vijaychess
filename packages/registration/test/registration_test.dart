@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:registration/model/events.dart';
 import 'package:registration/model/players.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() {
   test('Create event with one player', () {
@@ -39,5 +40,26 @@ void main() {
     assert(expected.nwsrsId == actual.nwsrsId);
     assert(expected.rating == actual.rating);
     assert(expected.status == actual.status);
+  });
+  test('Verify format from firestore for events', () {
+    Event expected = Event(
+      organizer: 'TD',
+      location: 'Internet',
+      name: 'test guild',
+      eventDay: DateTime.parse('2021-12-31 16:00:00.0000'),
+    );
+    var eventDayObj = Timestamp(1640995200, 0);
+
+    var eventJson = {
+      'organizer': 'TD',
+      'location': 'Internet',
+      'name': 'test guild',
+      'eventDay': eventDayObj,
+    };
+    Event actual = Event.fromFireStore(eventJson);
+    assert(expected.organizer == actual.organizer);
+    assert(expected.location == actual.location);
+    assert(expected.name == actual.name);
+    assert(expected.eventDay == actual.eventDay);
   });
 }

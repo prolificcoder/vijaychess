@@ -31,11 +31,8 @@ class EventsScreen extends StatelessWidget {
                     title: Text(event.name),
                     subtitle: Text('${event.location}\n${event.organizer}'),
                     isThreeLine: true,
-                    trailing: Text(event.eventDay
-                        .toIso8601String()
-                        .split('T')
-                        .first
-                        .toString()),
+                    trailing:
+                        Text(event.eventDay.toIso8601String().split('T').first),
                   );
                 },
               ),

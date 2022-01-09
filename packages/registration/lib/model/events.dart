@@ -20,7 +20,7 @@ class Event {
       : this(
             name: json['name']! as String,
             location: json['location']! as String,
-            eventDay: DateTime.parse(json['eventDay']!.toDate().toString()),
+            eventDay: json['eventDay'].toDate(),
             organizer: json['organizer'] as String);
 
   Map<String, dynamic> toJson() {
