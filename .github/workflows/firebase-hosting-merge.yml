@@ -20,8 +20,6 @@ jobs:
           melos bootstrap
       - name: Lint main and subpackage
         run: melos exec flutter analyze
-      - name: Run all tests
-        run: melos exec flutter test
       - name: Build web binary
         run: flutter build web
       - name: Deploy latest bits to web
