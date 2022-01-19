@@ -5,7 +5,7 @@ import 'package:vijaychess/main.dart' as app;
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  testWidgets("Verify home page loads and shows About",
+  testWidgets("Verify navigations work for players",
       (WidgetTester tester) async {
     app.main();
 
@@ -15,6 +15,16 @@ void main() {
 
     expect(find.text('Vijay Chess Club'), findsOneWidget);
 
-    await tester.tap(find.text('About'));
+    await tester.tap(find.text('List all players'));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Players list'), findsOneWidget);
+
+    await tester.tap(find.text('Create new player'));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Add a new player'), findsOneWidget);
   });
 }
