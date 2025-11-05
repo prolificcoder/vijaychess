@@ -6,9 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: subosito/flutter-action@v1
+      - uses: subosito/flutter-action@v2
         with:
-          channel: beta
+          channel: stable
+          flutter-version: 3.35.7
       - name: Melos activate and bootstrap
         run: |
           dart pub global activate melos
@@ -17,12 +18,6 @@ jobs:
         run: melos exec flutter analyze
       - name: Run unit tests
         run: flutter test packages/registration/test
-      - uses: dorny/test-reporter@v1
-        if: success() || failure()
-        with:
-          name: Unit tests
-          path: test-results.json
-          reporter: flutter-json
       - name: Build web binary
         run: flutter build web
       - name: Build android apk
@@ -50,18 +45,13 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
-      - uses: subosito/flutter-action@v1
+      - uses: subosito/flutter-action@v2
         with:
-          channel: beta
+          channel: stable
+          flutter-version: 3.35.7
       - run: flutter pub get
       - name: Run widget tests
         run: flutter test
-      - uses: dorny/test-reporter@v1
-        if: success() || failure()
-        with:
-          name: Widget unit tests
-          path: test-results.json
-          reporter: flutter-json
       - name: Build iOS app in debug mode
         run: flutter build ios --debug --no-codesign
       - uses: futureware-tech/simulator-action@v1
@@ -69,9 +59,3 @@ jobs:
           model: "iPhone 12"
       - name: Run all integration tests on iOS simulator
         run: flutter test integration_test/
-      - uses: dorny/test-reporter@v1
-        if: success() || failure()
-        with:
-          name: Integration E2E tests
-          path: test-results.json
-          reporter: flutter-json
