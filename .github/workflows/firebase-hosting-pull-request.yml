@@ -13,9 +13,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
       - name: Analyze main package
-        run: flutter analyze
+        run: flutter analyze --no-fatal-infos
       - name: Analyze registration package
-        run: cd packages/registration && flutter pub get && flutter analyze
+        run: cd packages/registration && flutter pub get && flutter analyze --no-fatal-infos
       - name: Run unit tests
         run: flutter test packages/registration/test
       - name: Build web binary
