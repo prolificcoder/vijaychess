@@ -27,7 +27,7 @@ dependencies:
   lints: ^5.0.0
   mailto: ^2.0.0
   responsive_framework: ^1.0.0
-  url_launcher: ^6.0.4
+  url_launcher: ^6.3.0
   intl: ^0.20.0
   registration:
     path: packages/registration
