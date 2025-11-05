@@ -16,8 +16,4 @@ pluginManagement {
     }
 }
 
-plugins {
-    id "dev.flutter.flutter-plugin-loader" apply false
-}
-
 include ":app"
