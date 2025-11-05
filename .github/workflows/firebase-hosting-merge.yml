@@ -15,12 +15,12 @@ jobs:
         with:
           channel: stable
           flutter-version: 3.35.7
-      - name: Melos activate and bootstrap
-        run: |
-          dart pub global activate melos
-          melos bootstrap
-      - name: Lint main and subpackage
-        run: melos exec flutter analyze
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Analyze main package
+        run: flutter analyze
+      - name: Analyze registration package
+        run: cd packages/registration && flutter pub get && flutter analyze
       - name: Build web binary
         run: flutter build web
       - name: Deploy latest bits to web

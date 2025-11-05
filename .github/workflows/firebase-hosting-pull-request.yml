@@ -10,12 +10,12 @@ jobs:
         with:
           channel: stable
           flutter-version: 3.35.7
-      - name: Melos activate and bootstrap
-        run: |
-          dart pub global activate melos
-          melos bootstrap
-      - name: Lint main and subpackage
-        run: melos exec flutter analyze
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Analyze main package
+        run: flutter analyze
+      - name: Analyze registration package
+        run: cd packages/registration && flutter pub get && flutter analyze
       - name: Run unit tests
         run: flutter test packages/registration/test
       - name: Build web binary
@@ -50,6 +50,8 @@ jobs:
           channel: stable
           flutter-version: 3.35.7
       - run: flutter pub get
+      - name: Update CocoaPods specs
+        run: pod repo update
       - name: Run widget tests
         run: flutter test
       - name: Build iOS app in debug mode
