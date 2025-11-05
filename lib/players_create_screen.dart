@@ -7,12 +7,11 @@ import 'package:registration/model/players.dart';
 import 'package:vijaychess/elevated_button_with_padding_widget.dart';
 
 class PlayersCreateScreen extends StatelessWidget {
-  PlayersCreateScreen({Key? key}) : super(key: key);
-
-  final _formKey = GlobalKey<FormBuilderState>();
+  const PlayersCreateScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormBuilderState>();
     final players = FirebaseFirestore.instance
         .collection('VCC-July')
         .withConverter<Player>(
@@ -21,53 +20,52 @@ class PlayersCreateScreen extends StatelessWidget {
             toFirestore: (player, _) => player.toJson());
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add a new player'),
+        title: const Text('Add a new player'),
       ),
       body: Column(children: [
         FormBuilder(
-            key: _formKey,
-            autoFocusOnValidationFailure: true,
+            key: formKey,
             child: Column(
               children: [
                 FormBuilderTextField(
                   name: "first_name",
-                  decoration: InputDecoration(labelText: "Enter first name"),
+                  decoration: const InputDecoration(labelText: "Enter first name"),
                   validator: FormBuilderValidators.compose(
-                      [FormBuilderValidators.required(context)]),
+                      [FormBuilderValidators.required()]),
                 ),
                 FormBuilderTextField(
                   name: "last_name",
-                  decoration: InputDecoration(labelText: "Enter last name"),
+                  decoration: const InputDecoration(labelText: "Enter last name"),
                   validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.required(context,
+                    FormBuilderValidators.required(
                         errorText: 'Last name is required')
                   ]),
                 ),
                 FormBuilderTextField(
                   name: "nwsrs_id",
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       labelText:
                           "Enter nwsrs id from http://chess.ratingsnw.com/ratings.html)"),
                   validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.required(context),
-                    FormBuilderValidators.max(context, 8),
+                    FormBuilderValidators.required(),
+                    FormBuilderValidators.maxLength(8),
                   ]),
                 ),
                 FormBuilderTextField(
                     name: "rating",
                     keyboardType: TextInputType.number,
                     decoration:
-                        InputDecoration(labelText: "Enter current rating"),
+                        const InputDecoration(labelText: "Enter current rating"),
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(context),
-                      FormBuilderValidators.numeric(context,
+                      FormBuilderValidators.required(),
+                      FormBuilderValidators.numeric(
                           errorText: 'Rating has to be numeric'),
-                      FormBuilderValidators.maxLength(context, 4),
+                      FormBuilderValidators.maxLength(4),
                     ])),
                 FormBuilderTextField(
                   name: "status",
                   initialValue: "Available",
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       labelText: "Enter status to play tournaments"),
                 ),
               ],
@@ -75,14 +73,14 @@ class PlayersCreateScreen extends StatelessWidget {
         ElevatedButtonWithPadding(
           child: ElevatedButton(
             onPressed: () {
-              if (_formKey.currentState!.saveAndValidate()) {
+              if (formKey.currentState!.saveAndValidate()) {
                 players.add(
                   Player(
-                      firstName: _formKey.currentState!.value['first_name'],
-                      lastName: _formKey.currentState!.value['last_name'],
-                      rating: int.parse(_formKey.currentState!.value['rating']),
-                      status: _formKey.currentState!.value['status'],
-                      nwsrsId: _formKey.currentState!.value['nwsrs_id']),
+                      firstName: formKey.currentState!.value['first_name'],
+                      lastName: formKey.currentState!.value['last_name'],
+                      rating: int.parse(formKey.currentState!.value['rating']),
+                      status: formKey.currentState!.value['status'],
+                      nwsrsId: formKey.currentState!.value['nwsrs_id']),
                 );
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Player created')),

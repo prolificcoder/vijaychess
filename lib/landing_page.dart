@@ -10,7 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'constants.dart' as Constants;
 
 class LandingPage extends StatelessWidget {
-  LandingPage({Key? key}) : super(key: key);
+  const LandingPage({super.key});
 
   void _openEmailIntent() async {
     final mailtoLink = Mailto(
@@ -38,33 +38,34 @@ Rating:
           child: Center(
             child: Column(
               children: <Widget>[
+                const SizedBox(height: 16),
                 Text(
                   'Over the board outdoor chess by National Master - Satyajit Malugu',
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ExpandablePanel(
                   header: Text('Past events',
-                      style: Theme.of(context).textTheme.subtitle1),
-                  collapsed: Text(''),
+                      style: Theme.of(context).textTheme.titleMedium),
+                  collapsed: const Text(''),
                   expanded: Column(children: [
                     ExpandableNotifier(
                       child: ExpandablePanel(
                           header: Text(
                               'VCC Summer OTB Tournament + Knockout Chess Pong! : July 31st',
-                              style: Theme.of(context).textTheme.subtitle1),
-                          collapsed: Text(''),
+                              style: Theme.of(context).textTheme.titleMedium),
+                          collapsed: const Text(''),
                           expanded: Column(children: [
-                            Linkify(
+                            const Linkify(
                                 text:
                                     'Another full event with ping pong side event! Rating results at http://chess.ratingsnw.com/report20-21/VijayChessClub073121.html.'),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             CarouselSlider(
                                 options: CarouselOptions(),
                                 items: Constants.pongImageList
                                     .map((item) => Container(
                                             child: Image.asset(
-                                          'images/' + item,
+                                          'images/$item',
                                         )))
                                     .toList()),
                           ])),
@@ -72,10 +73,10 @@ Rating:
                     ExpandableNotifier(
                       child: ExpandablePanel(
                           header: Text('VCC Class + Tournament: July 10th',
-                              style: Theme.of(context).textTheme.subtitle1),
-                          collapsed: Text(''),
+                              style: Theme.of(context).textTheme.titleMedium),
+                          collapsed: const Text(''),
                           expanded: Column(children: [
-                            Text(
+                            const Text(
                                 '''We had a great turnout for this event with 10 kids and 2 adults joined as eveners.
                                 '''),
                             CarouselSlider(
@@ -83,7 +84,7 @@ Rating:
                                 items: Constants.julyImageList
                                     .map((item) => Container(
                                             child: Image.asset(
-                                          'images/' + item,
+                                          'images/$item',
                                         )))
                                     .toList()),
                           ])),
@@ -91,12 +92,12 @@ Rating:
                     ExpandableNotifier(
                       child: ExpandablePanel(
                           header: Text('VCC Class + Tournament: Jun 12th',
-                              style: Theme.of(context).textTheme.subtitle1),
-                          collapsed: Text(''),
+                              style: Theme.of(context).textTheme.titleMedium),
+                          collapsed: const Text(''),
                           expanded: Column(children: [
-                            Text(
+                            const Text(
                                 '''Over the board class, some pizza and rated tournament
-Class starts at 10AM sharp. Then there will be break and we start the tournament at about 11. Pizza will be served as lunch. 
+Class starts at 10AM sharp. Then there will be break and we start the tournament at about 11. Pizza will be served as lunch.
 Masks are required for class time. Capped at max 10 players
 Class will be focused on opening principles and exploitation of opening mistakes.
 Tournament Game 25 + 5 sec increment. Mini swiss/Quad 3 round event. Real pieces, real clock, real notation.
@@ -108,19 +109,19 @@ Rating results: http://chess.ratingsnw.com/report20-21/VijayChessClub061221.html
                                 items: Constants.juneImageList
                                     .map((item) => Container(
                                             child: Image.asset(
-                                          'images/' + item,
+                                          'images/$item',
                                         )))
                                     .toList()),
                           ])),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     ExpandableNotifier(
                       child: ExpandablePanel(
-                          header: Text(
+                          header: const Text(
                               'VCC Kickoff: OTB Class + Rated Tournament on Memorial day - May 31st'),
-                          collapsed: Text(''),
+                          collapsed: const Text(''),
                           expanded: Column(children: [
-                            Text(
+                            const Text(
                                 '''Get ready for some over the board chess! We are going to kickoff VCC by a class + rated tournament event.
 Class starts at 2PM sharp and should be finished by 3. There will be break for about 15 mins and then we start the tournament. Wrap up around 6PM.
 Masks are required for the entire duration.
@@ -134,10 +135,10 @@ If you would like class only or tournament only for a lower price, that's an opt
                                 items: Constants.kickoffImageList
                                     .map((item) => Container(
                                             child: Image.asset(
-                                          'images/' + item,
+                                          'images/$item',
                                         )))
                                     .toList()),
-                            Linkify(
+                            const Linkify(
                                 text:
                                     'Ratings cross table posted at: http://chess.ratingsnw.com/report20-21/VijayChessClubMemDay.html',
                                 options: LinkifyOptions(humanize: false)),
@@ -145,45 +146,45 @@ If you would like class only or tournament only for a lower price, that's an opt
                     ),
                   ]),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ExpandablePanel(
                   header: Text('Location',
-                      style: Theme.of(context).textTheme.subtitle1),
-                  collapsed: Text(''),
-                  expanded: Text('2512 242nd Ave SE, Sammamish'),
+                      style: Theme.of(context).textTheme.titleMedium),
+                  collapsed: const Text(''),
+                  expanded: const Text('2512 242nd Ave SE, Sammamish'),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ExpandablePanel(
                   header: Text('Why in person?',
-                      style: Theme.of(context).textTheme.subtitle1),
-                  collapsed: Text(''),
-                  expanded: Text('''
-Serious chess tournaments happen over the board and I would like students to get prepared for them. Also for retention and engagement, real life can't be beat. 
+                      style: Theme.of(context).textTheme.titleMedium),
+                  collapsed: const Text(''),
+                  expanded: const Text('''
+Serious chess tournaments happen over the board and I would like students to get prepared for them. Also for retention and engagement, real life can't be beat.
 Resources available over the internet for chess improvement are vast and I will help motivated students to supplement class learnings.
 '''),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ExpandablePanel(
                   header: Text('About',
-                      style: Theme.of(context).textTheme.subtitle1),
-                  collapsed: Text(''),
+                      style: Theme.of(context).textTheme.titleMedium),
+                  collapsed: const Text(''),
                   expanded: Column(
                     children: [
                       ExpandableNotifier(
                         child: ExpandablePanel(
                           header: Text('Motivation',
-                              style: Theme.of(context).textTheme.subtitle2),
-                          collapsed: Text(''),
-                          expanded: Text(
+                              style: Theme.of(context).textTheme.titleSmall),
+                          collapsed: const Text(''),
+                          expanded: const Text(
                               "My dad's (now expired) name is Vijaya Kumar, he taught me how pieces move when I was 6 but what is extra ordinary is that he kept on pushing me go for chess coaching and he didn't rest until he found a great coach for me. He never said no for coaching or money for tournament or skipping school for practise, he completely believed in me. I hope to motivate my son as much as my dad motivates me everyday to do my best. Vijay means winning(or winner) I hope students here win what they are after!"),
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       ExpandableNotifier(
                         child: ExpandablePanel(
                           header: Text('Chess career',
-                              style: Theme.of(context).textTheme.subtitle2),
-                          collapsed: Text(''),
+                              style: Theme.of(context).textTheme.titleSmall),
+                          collapsed: const Text(''),
                           expanded: Linkify(
                               onOpen: (link) => launch(link.url), text: '''
 I started learning chess at 11 years of age and became serious and had a full time coach from 13. My coaches inculcated in me a growth mindset and attacking play. 
@@ -198,13 +199,13 @@ Linkedin: https://www.linkedin.com/in/satyajitmalugu/
 '''),
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       ExpandableNotifier(
                         child: ExpandablePanel(
                           header: Text('Coaching style',
-                              style: Theme.of(context).textTheme.subtitle2),
-                          collapsed: Text(''),
-                          expanded: Text('''
+                              style: Theme.of(context).textTheme.titleSmall),
+                          collapsed: const Text(''),
+                          expanded: const Text('''
 While I coach at various levels, my skill and passion shines for committed players who want to compete in tournaments.
 My focus in teaching will be on practical OTB play with analysis of previous games and retrospection. I teach skills that avoid making blunders and improvement from each serious tournament game. 
 I specialize in middle game and attacking style because I believe this brings rapid development. My coach has this favorite quote, "even if the opponent is a world champion, he has the same set of pieces and has to work with the same rules to defeat you".
@@ -216,14 +217,14 @@ A quote from a 12 yr old student's parent "Thanks to your coaching, he has been 
                     ],
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
                     context.go('/players');
                   },
                   child: const Text('List all players'),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
                     context.go('/events');
@@ -238,7 +239,7 @@ A quote from a 12 yr old student's parent "Thanks to your coaching, he has been 
       floatingActionButton: FloatingActionButton(
         onPressed: _openEmailIntent,
         tooltip: 'Contact',
-        child: Icon(Icons.mail_outlined),
+        child: const Icon(Icons.mail_outlined),
       ),
       persistentFooterButtons: <Widget>[
         Linkify(
