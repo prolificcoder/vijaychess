@@ -38,8 +38,7 @@ class VCCApp extends StatelessWidget {
       localizationsDelegates: const [
         FormBuilderLocalizations.delegate,
       ],
-      routeInformationParser: _router.routeInformationParser,
-      routerDelegate: _router.routerDelegate,
+      routerConfig: _router,
       title: 'Vijay Chess Club',
       builder: (context, widget) => ResponsiveBreakpoints.builder(
           child: BouncingScrollWrapper.builder(context, widget!),
