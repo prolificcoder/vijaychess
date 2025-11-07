@@ -16,14 +16,14 @@ class LandingPage extends StatelessWidget {
     final mailtoLink = Mailto(
       subject: 'Chess coaching inquiry',
       body: '''
-Name: 
-Age: 
+Name:
+Age:
 Rating:
       ''',
       to: ['satya@malugu.com'],
     ).toString();
     print(mailtoLink);
-    await launch(mailtoLink);
+    await launchUrl(Uri.parse(mailtoLink));
   }
 
   @override
@@ -186,7 +186,7 @@ Resources available over the internet for chess improvement are vast and I will 
                               style: Theme.of(context).textTheme.titleSmall),
                           collapsed: const Text(''),
                           expanded: Linkify(
-                              onOpen: (link) => launch(link.url), text: '''
+                              onOpen: (link) => launchUrl(Uri.parse(link.url)), text: '''
 I started learning chess at 11 years of age and became serious and had a full time coach from 13. My coaches inculcated in me a growth mindset and attacking play. 
 My peak chess performance was reached in about 3 years of professional stint. I played mostly in Andhra, India and I won the state championships in Under-14, Under-15, Under-19 and state official. 
 I continued playing semi-professionally after joining college and won several collegiate and University championships. I was the captain for the Andhra university where our team got into top 10 in nationals. 
@@ -243,7 +243,7 @@ A quote from a 12 yr old student's parent "Thanks to your coaching, he has been 
       ),
       persistentFooterButtons: <Widget>[
         Linkify(
-            onOpen: (link) => launch(link.url),
+            onOpen: (link) => launchUrl(Uri.parse(link.url)),
             text:
                 'Made with flutter, code hosted at https://github.com/prolificcoder/vijaychess'),
       ],
