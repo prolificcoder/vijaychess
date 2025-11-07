@@ -6,12 +6,11 @@ import 'package:go_router/go_router.dart';
 import 'package:registration/model/events.dart';
 
 class EventsCreateScreen extends StatelessWidget {
-  EventsCreateScreen({Key? key}) : super(key: key);
-
-  final _formKey = GlobalKey<FormBuilderState>();
+  const EventsCreateScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormBuilderState>();
     final eventsRef = FirebaseFirestore.instance
         .collection('events')
         .withConverter<Event>(
@@ -20,35 +19,34 @@ class EventsCreateScreen extends StatelessWidget {
             toFirestore: (event, _) => event.toJson());
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add a new event'),
+        title: const Text('Add a new event'),
       ),
       body: Column(children: [
         FormBuilder(
-            key: _formKey,
-            autoFocusOnValidationFailure: true,
+            key: formKey,
             child: Column(
               children: [
                 FormBuilderTextField(
                   name: "name",
-                  decoration: InputDecoration(labelText: "Enter event name"),
+                  decoration: const InputDecoration(labelText: "Enter event name"),
                   validator: FormBuilderValidators.compose(
-                      [FormBuilderValidators.required(context)]),
+                      [FormBuilderValidators.required()]),
                 ),
                 FormBuilderTextField(
                   name: "organizer",
                   decoration:
-                      InputDecoration(labelText: "Enter organizer name"),
+                      const InputDecoration(labelText: "Enter organizer name"),
                   validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.required(context,
+                    FormBuilderValidators.required(
                         errorText: 'Organizer name is required')
                   ]),
                 ),
                 FormBuilderTextField(
                   name: "location",
                   decoration:
-                      InputDecoration(labelText: "Enter location of the event"),
+                      const InputDecoration(labelText: "Enter location of the event"),
                   validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.required(context,
+                    FormBuilderValidators.required(
                         errorText: 'Location is required')
                   ]),
                 ),
@@ -56,19 +54,19 @@ class EventsCreateScreen extends StatelessWidget {
                   name: "eventDay",
                   inputType: InputType.date,
                   decoration:
-                      InputDecoration(labelText: "Enter event start date"),
+                      const InputDecoration(labelText: "Enter event start date"),
                 ),
               ],
             )),
         ElevatedButton(
           onPressed: () {
-            if (_formKey.currentState!.saveAndValidate()) {
+            if (formKey.currentState!.saveAndValidate()) {
               eventsRef.add(
                 Event(
-                    name: _formKey.currentState!.value['name'],
-                    organizer: _formKey.currentState!.value['organizer'],
-                    location: _formKey.currentState!.value['location'],
-                    eventDay: _formKey.currentState!.value['eventDay']),
+                    name: formKey.currentState!.value['name'],
+                    organizer: formKey.currentState!.value['organizer'],
+                    location: formKey.currentState!.value['location'],
+                    eventDay: formKey.currentState!.value['eventDay']),
               );
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Event created')),
