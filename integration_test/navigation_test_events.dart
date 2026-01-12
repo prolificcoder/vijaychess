@@ -5,26 +5,25 @@ import 'package:vijaychess/main.dart' as app;
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  testWidgets("Verify home page loads and shows About",
+
+  testWidgets("Verify navigations work for events",
       (WidgetTester tester) async {
     app.main();
 
     //For web runs Sleep for 2 seconds!!
-    //await Future.delayed(const Duration(seconds: 2), () {});
+    await Future.delayed(const Duration(seconds: 2), () {});
     await tester.pumpAndSettle();
 
-    expect(find.text('Vijay Chess Club'), findsOneWidget);
-
-    await tester.tap(find.text('List all players'));
-
-    await tester.pumpAndSettle();
-
-    expect(find.text('Players list'), findsOneWidget);
-
-    await tester.tap(find.text('Create new player'));
+    await tester.tap(find.text('List all events'));
 
     await tester.pumpAndSettle();
 
-    expect(find.text('Add a new player'), findsOneWidget);
+    expect(find.text('Events list'), findsOneWidget);
+
+    await tester.tap(find.text('Create new event'));
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Create event'), findsOneWidget);
   });
 }
